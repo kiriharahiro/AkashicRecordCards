@@ -1,0 +1,9 @@
+# 画像やZIP、PDFなどを誤ってGitHubにアップロードしないための除外設定
+*.zip
+*.jpg
+*.jpeg
+*.png
+*.gif
+*.pdf
+.DS_Store
+Thumbs.db
