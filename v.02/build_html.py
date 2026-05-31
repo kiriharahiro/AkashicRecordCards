@@ -1128,7 +1128,7 @@ html_template = """<!DOCTYPE html>
                                 <div id="panel-card-meaning">意味</div>
                             </div>
                             <div class="modal-section-title" style="margin-top: 10px; font-size: 0.8rem;">詳細解説</div>
-                            <div class="modal-text" id="panel-card-desc" style="font-size: 0.8rem; line-height: 1.4; max-height: 120px; overflow-y: auto;">
+                            <div class="modal-text" id="panel-card-desc" style="font-size: 0.85rem; line-height: 1.6; margin-top: 5px;">
                                 解説文
                             </div>
                         </div>
