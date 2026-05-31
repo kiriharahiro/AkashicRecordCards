@@ -832,9 +832,135 @@
         .modal-text { font-size: 0.85rem; line-height: 1.5; color: var(--text-color); }
 
         .copyright-notice { text-align: center; font-size: 0.65rem; color: rgba(255,255,255,0.2); padding: 20px 10px; }
+
+        /* ==========================================
+        /* 【セキュリティ】パスコード画面のスタイル
+        /* ========================================== */
+        .passcode-overlay {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: radial-gradient(circle at 50% 30%, rgba(13, 15, 30, 0.98) 0%, rgba(5, 6, 11, 1) 100%);
+            z-index: 100000; /* すべての要素を覆う */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 1;
+            transition: opacity 0.4s ease, visibility 0.4s ease;
+            backdrop-filter: blur(25px);
+        }
+        .passcode-overlay.fade-out {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+        .passcode-card {
+            background: rgba(13, 15, 30, 0.75);
+            border: 1px solid var(--gold);
+            border-radius: 20px;
+            padding: 40px 30px;
+            max-width: 420px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 15px 50px rgba(0,0,0,0.8), 0 0 25px var(--gold-glow);
+            backdrop-filter: blur(10px);
+            animation: passcodeCardIn 0.5s cubic-bezier(0.25, 0.8, 0.25, 1) forwards;
+        }
+        @keyframes passcodeCardIn {
+            from { opacity: 0; transform: translateY(30px) scale(0.95); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        .passcode-header h2 {
+            font-family: 'Cinzel', serif;
+            color: var(--gold);
+            font-size: 1.6rem;
+            letter-spacing: 4px;
+            margin-bottom: 12px;
+            text-shadow: 0 0 15px var(--gold-glow);
+        }
+        .passcode-header p {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+            margin-bottom: 25px;
+        }
+        .passcode-form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            align-items: center;
+            width: 100%;
+        }
+        #passcode-input {
+            width: 100%;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 12px 16px;
+            color: #fff;
+            font-size: 1.1rem;
+            text-align: center;
+            letter-spacing: 4px;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+        #passcode-input:focus {
+            border-color: var(--gold);
+            box-shadow: 0 0 15px var(--gold-glow);
+            background: rgba(255,255,255,0.06);
+        }
+        .passcode-submit-btn {
+            width: 100%;
+            background: linear-gradient(135deg, var(--gold) 0%, #b8860b 100%);
+            color: #05060b;
+            border: none;
+            padding: 12px;
+            font-size: 0.95rem;
+            font-weight: bold;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px var(--gold-glow);
+            letter-spacing: 2px;
+        }
+        .passcode-submit-btn:hover {
+            transform: scale(1.02);
+            box-shadow: 0 6px 20px var(--gold);
+        }
+        .passcode-error-msg {
+            color: #ff4d4d;
+            font-size: 0.75rem;
+            min-height: 18px;
+            transition: all 0.3s ease;
+            text-shadow: 0 0 5px rgba(255,77,77,0.3);
+            margin-top: 5px;
+        }
+        /* ブルブル揺れるエラーアニメーション */
+        .shake {
+            animation: shakeAnim 0.4s ease-in-out;
+        }
+        @keyframes shakeAnim {
+            0%, 100% { transform: translateX(0); }
+            20%, 60% { transform: translateX(-8px); }
+            40%, 80% { transform: translateX(8px); }
+        }
     </style>
 </head>
 <body>
+
+    <!-- パスコードロックオーバーレイ -->
+    <div id="passcode-overlay" class="passcode-overlay">
+        <div class="passcode-card">
+            <div class="passcode-header">
+                <h2>Akashic Records</h2>
+                <p>リーディングボードへアクセスするには<br>セキュリティコードを入力してください</p>
+            </div>
+            <div class="passcode-form">
+                <input type="password" id="passcode-input" placeholder="セキュリティコードを入力" autofocus onkeydown="if(event.key === 'Enter') submitPasscode()">
+                <button class="passcode-submit-btn" onclick="submitPasscode()">解錠する</button>
+                <div id="passcode-error" class="passcode-error-msg"></div>
+            </div>
+        </div>
+    </div>
 
     <!-- ヘッダー -->
     <header>
@@ -1128,6 +1254,49 @@
 
     <!-- JavaScript 処理 -->
     <script>
+        // ==========================================
+        // 【セキュリティ】パスコード保護機能
+        // ==========================================
+        const SECURED_CODE = "senka8";
+
+        function checkAuthentication() {
+            const isUnlocked = sessionStorage.getItem("akashic_unlocked");
+            const overlay = document.getElementById("passcode-overlay");
+            if (isUnlocked === "true") {
+                if (overlay) overlay.style.display = "none";
+            }
+        }
+
+        function submitPasscode() {
+            const input = document.getElementById("passcode-input");
+            const error = document.getElementById("passcode-error");
+            const card = document.querySelector(".passcode-card");
+            
+            if (!input) return;
+            
+            const value = input.value.trim();
+            if (value === SECURED_CODE) {
+                sessionStorage.setItem("akashic_unlocked", "true");
+                const overlay = document.getElementById("passcode-overlay");
+                if (overlay) {
+                    overlay.classList.add("fade-out");
+                    setTimeout(() => {
+                        overlay.style.display = "none";
+                    }, 400);
+                }
+            } else {
+                error.textContent = "パスコードが正しくありません。";
+                input.value = "";
+                input.focus();
+                
+                if (card) {
+                    card.classList.remove("shake");
+                    void card.offsetWidth; // リフロートリガーで再起動
+                    card.classList.add("shake");
+                }
+            }
+        }
+
         // アカシックレコードカードのデータベース
         const CARDS_DATA = [
             {
@@ -2517,6 +2686,8 @@
         // ==========================================
         function initializeApp() {
             try {
+                // 起動時パスコード認証チェック
+                checkAuthentication();
                 // カード一覧の描画
                 renderCardsGrid();
                 // セルフカード選択の初期化
