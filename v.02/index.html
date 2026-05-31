@@ -1255,9 +1255,18 @@
     <!-- JavaScript 処理 -->
     <script>
         // ==========================================
-        // 【セキュリティ】パスコード保護機能
+        // 【セキュリティ】パスコード保護機能（暗号ハッシュ化）
         // ==========================================
-        const SECURED_CODE = "senka8";
+        // 「senka8」のSHA-256ハッシュ値
+        const SECURED_HASH = "78b2a4390771a5b39027a1354ed19721ba43d20a13eb235b34134b52674f10a2";
+
+        // 文字列からSHA-256ハッシュを生成する非同期関数
+        async function sha256(message) {
+            const msgBuffer = new TextEncoder().encode(message);
+            const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+            const hashArray = Array.from(new Uint8Array(hashBuffer));
+            return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+        }
 
         function checkAuthentication() {
             const isUnlocked = sessionStorage.getItem("akashic_unlocked");
@@ -1267,7 +1276,7 @@
             }
         }
 
-        function submitPasscode() {
+        async function submitPasscode() {
             const input = document.getElementById("passcode-input");
             const error = document.getElementById("passcode-error");
             const card = document.querySelector(".passcode-card");
@@ -1275,7 +1284,10 @@
             if (!input) return;
             
             const value = input.value.trim();
-            if (value === SECURED_CODE) {
+            // 入力値をハッシュ化して比較（senka8そのものはソースコードに含まれません）
+            const hashedInput = await sha256(value);
+            
+            if (hashedInput === SECURED_HASH) {
                 sessionStorage.setItem("akashic_unlocked", "true");
                 const overlay = document.getElementById("passcode-overlay");
                 if (overlay) {
