@@ -1695,7 +1695,8 @@ html_template = """<!DOCTYPE html>
         function renderSelfPicker() {
             const grid = document.getElementById('self-picker-grid');
             grid.innerHTML = "";
-            CARDS_DATA.forEach(card => {
+            const selectableCards = CARDS_DATA.filter(c => c.no !== 0);
+            selectableCards.forEach(card => {
                 const item = document.createElement('div');
                 item.className = 'picker-card-item';
                 if (sessionState.selfCardNo === card.no) item.classList.add('selected');
@@ -1715,9 +1716,10 @@ html_template = """<!DOCTYPE html>
         }
 
         function drawSelfRandom() {
-            const count = CARDS_DATA.length;
+            const selectableCards = CARDS_DATA.filter(c => c.no !== 0);
+            const count = selectableCards.length;
             const idx = Math.floor(Math.random() * count);
-            const card = CARDS_DATA[idx];
+            const card = selectableCards[idx];
             sessionState.selfCardNo = card.no;
             
             renderSelfPicker();
@@ -1835,8 +1837,8 @@ html_template = """<!DOCTYPE html>
             else if (sessionState.spreadType === 'four') titleEl.textContent = "四枚スプレッド (問題への深い洞察)";
             else if (sessionState.spreadType === 'nine') titleEl.textContent = "九枚スプレッド (多次元レベル)";
 
-            // 1. スプレッド用のカードを決定（セルフカードを除外してシャッフル）
-            const pool = CARDS_DATA.filter(c => c.no !== sessionState.selfCardNo);
+            // 1. スプレッド用のカードを決定（セルフカードおよび裏面画像データを除外してシャッフル）
+            const pool = CARDS_DATA.filter(c => c.no !== sessionState.selfCardNo && c.no !== 0);
             const shuffledPool = [...pool].sort(() => Math.random() - 0.5);
 
             const slots = SLOT_ROLES[sessionState.spreadType];
@@ -2043,7 +2045,8 @@ html_template = """<!DOCTYPE html>
 
                 // ドロップダウン生成
                 let optionsHtml = "";
-                CARDS_DATA.forEach(card => {
+                const selectableCards = CARDS_DATA.filter(c => c.no !== 0);
+                selectableCards.forEach(card => {
                     optionsHtml += `<option value="${card.no}">${card.no}. ${card.theme_ja}</option>`;
                 });
 
@@ -2143,9 +2146,13 @@ html_template = """<!DOCTYPE html>
         // ==========================================
         // 【画面4】カード図鑑・検索・詳細モーダル
         // ==========================================
-        function renderCardsGrid(filteredData = CARDS_DATA) {
+        function renderCardsGrid(filteredData = null) {
             const container = document.getElementById('cards-grid-container');
             container.innerHTML = "";
+
+            if (filteredData === null) {
+                filteredData = CARDS_DATA.filter(c => c.no !== 0);
+            }
 
             if (filteredData.length === 0) {
                 container.innerHTML = `<div style="grid-column: 1/-1; text-align: center; color: var(--text-muted); padding: 40px 0;">カードが見つかりませんでした</div>`;
@@ -2172,12 +2179,13 @@ html_template = """<!DOCTYPE html>
 
         function filterCards() {
             const query = document.getElementById('search-input').value.toLowerCase().trim();
+            const selectableCards = CARDS_DATA.filter(c => c.no !== 0);
             if (!query) {
-                renderCardsGrid(CARDS_DATA);
+                renderCardsGrid(selectableCards);
                 return;
             }
 
-            const filtered = CARDS_DATA.filter(card => {
+            const filtered = selectableCards.filter(card => {
                 return card.no.toString() === query || 
                        card.theme_ja.toLowerCase().includes(query) || 
                        card.theme_en.toLowerCase().includes(query) ||
