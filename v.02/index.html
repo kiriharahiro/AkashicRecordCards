@@ -75,6 +75,44 @@
             letter-spacing: 1px;
         }
 
+        /* 設定＆同期ステータススタイル */
+        .sync-status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            display: inline-block;
+            box-shadow: 0 0 8px currentColor;
+            transition: all 0.3s ease;
+        }
+        .sync-status-dot.online {
+            background-color: #00ff66;
+            color: rgba(0, 255, 102, 0.6);
+            animation: pulse-green 2s infinite;
+        }
+        .sync-status-dot.offline {
+            background-color: var(--text-muted);
+            color: rgba(159, 164, 188, 0.4);
+        }
+        .sync-status-dot.error {
+            background-color: #ff3333;
+            color: rgba(255, 51, 51, 0.6);
+            animation: pulse-red 2s infinite;
+        }
+        @keyframes pulse-green {
+            0% { box-shadow: 0 0 0 0 rgba(0, 255, 102, 0.7); }
+            70% { box-shadow: 0 0 0 8px rgba(0, 255, 102, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(0, 255, 102, 0); }
+        }
+        @keyframes pulse-red {
+            0% { box-shadow: 0 0 0 0 rgba(255, 51, 51, 0.7); }
+            70% { box-shadow: 0 0 0 8px rgba(255, 51, 51, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(255, 51, 51, 0); }
+        }
+        .settings-btn:hover {
+            transform: rotate(45deg);
+        }
+
+
         /* メインコンテンツ */
         main {
             flex: 1;
@@ -964,9 +1002,19 @@
 
     <!-- ヘッダー -->
     <header>
-        <h1>Akashic Records Reading</h1>
-        <p>〜 アカシックレコード 瞑想 ＆ カード・スプレッド 〜</p>
+        <div class="header-container" style="position: relative; width: 100%; display: flex; justify-content: center; align-items: center; min-height: 50px;">
+            <div style="flex-grow: 1; text-align: center;">
+                <h1>Akashic Records Reading</h1>
+                <p>〜 アカシックレコード 瞑想 ＆ カード・スプレッド 〜</p>
+            </div>
+            <!-- 設定＆ステータスアイコンを右上に配置 -->
+            <div class="header-controls" style="position: absolute; right: 10px; display: flex; align-items: center; gap: 10px;">
+                <span id="sync-status-indicator" class="sync-status-dot offline" title="ローカルデータ使用中"></span>
+                <button id="settings-btn" class="settings-btn" title="同期設定" style="background: none; border: none; color: var(--gold); font-size: 1.3rem; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: transform 0.3s ease;">⚙️</button>
+            </div>
+        </div>
     </header>
+
 
     <!-- メインコンテンツ -->
     <main>
@@ -1604,7 +1652,7 @@
                         "spiritual_meaning": "ユニバーサルマインドつながり合っていること",
                         "positive": "マインドのパワーマインドフルネス 独創的なヴィジョン",
                         "reverse": "不思議だと思う無垢な気持ちと畏敬の念の欠如何かに心を奪われている不安狭い了見",
-                        "description": "イマジネーションの役割は、地球をとりかこむ思考エネルギーの粒子が、より大きな構造を形成するための基礎を創ることです。より大きく複雑な構造をもった思考は人間同士のコミュニケーションの土台を創ります。感覚も絡んだヴィジョンを概念として受け取る能力なしには、して、それから得た洞察をお互いにシェアることができなければ、人類は種として進化できません。カードの上に描かれた太陽は、三角形がマインドを境界の中に包み込んでいる間に発揮される天才性を象徴しています。枠の頂上にあるのは、ダイアモンドのシンボルです。ダイアはイマジネーションが葛藤なく使われた場合、いかに貴重なものであるかを表しています。イマジネーションは分析的な思考に翼を与え、神秘の叡智として新しい高みへと飛翔させます。下にはマインドの中を川の様に流れる思考のエネルギーが描かれ、山の頂上から滝のように流れ落ちて概念というプールを創っています。葛藤から自由な想念エネルギーは、聖なる形へと上昇して私たちの想念を実現化します。私たちは想像できないものは、現実化することはできません。",
+                        "description": "イマジネーションの役割は、地球をとりかこむ思考エネルギーの粒子が、より大きな構造を形成するための基礎を創ることです。より大きく複雑な構造をもった思考は人間同士のコミュニケーションの土台を創ります。感覚も絡んだヴィジョンを概念として受け取る能力なしには、そして、それから得た洞察をお互いにシェアることができなければ、人類は種として進化できません。\nカードの上に描かれた太陽は、三角形がマインドを境界の中に包み込んでいる間に発揮される天才性を象徴しています。枠の頂上にあるのは、ダイアモンドのシンボルです。ダイアはイマジネーションが葛藤なく使われた場合、いかに貴重なものであるかを表しています。イマジネーションは分析的な思考に翼を与え、神秘の叡智として新しい高みへと飛翔させます。下にはマインドの中を川の様に流れる思考のエネルギーが描かれ、山の頂上から滝のように流れ落ちて概念というプールを創っています。葛藤から自由な想念エネルギーは、聖なる形へと上昇して私たちの想念を実現化します。私たちは想像できないものは、現実化することはできません。",
                         "url_positive": "https://drive.google.com/file/d/1vlUysAgCfmgmttCK6ZIbIM6_11EaXEUd/view?usp=sharing",
                         "url_reverse": "https://drive.google.com/file/d/1IKDpRFFyflSGUuilaCdT3CqfBGSPhwR0/view?usp=sharing",
                         "spiritual_level": "ユニバーサルマインドの生のままのパワー",
@@ -1756,8 +1804,13 @@
 ];
 
         // カード裏面画像の取得（no: 0 の url_positive を直リンク変換）
-        const backCardData = CARDS_DATA.find(card => card.no === 0);
-        const CARD_BACK_IMAGE_URL = backCardData && backCardData.url_positive ? getDirectImageUrl(backCardData.url_positive) : "";
+        let CARD_BACK_IMAGE_URL = "";
+        function updateCardBackImageUrl() {
+            const backCardData = CARDS_DATA.find(card => card.no === 0);
+            CARD_BACK_IMAGE_URL = backCardData && backCardData.url_positive ? getDirectImageUrl(backCardData.url_positive) : "";
+        }
+        updateCardBackImageUrl();
+
 
 
         // プレビュー直リンク自動変換関数
@@ -2702,12 +2755,257 @@
         }
 
         // ==========================================
+        // 【新機能】Google スプレッドシート連携機能
+        // ==========================================
+        let SPREADSHEET_ID = "";
+
+        // 共有URLまたはIDからスプレッドシートIDを抽出する関数
+        function extractSpreadsheetId(urlOrId) {
+            if (!urlOrId) return "";
+            urlOrId = urlOrId.trim();
+            const matches = urlOrId.match(/\/d\/([a-zA-Z0-9_-]+)/);
+            if (matches && matches[1]) {
+                return matches[1];
+            }
+            return urlOrId;
+        }
+
+        // スプレッドシートからデータをフェッチする関数
+        async function loadSpreadsheetData(targetId = null) {
+            const id = targetId || SPREADSHEET_ID;
+            if (!id) {
+                updateSyncUI("offline", "ローカルモード", "アプリ内蔵のカードデータ（最終ビルド時点）で動作しています。");
+                return false;
+            }
+
+            try {
+                const url = `https://docs.google.com/spreadsheets/d/${id}/gviz/tq?tqx=out:json`;
+                // タイムアウト付きフェッチ (5秒)
+                const controller = new AbortController();
+                const timeoutId = setTimeout(() => controller.abort(), 5000);
+                
+                const response = await fetch(url, { signal: controller.signal });
+                clearTimeout(timeoutId);
+
+                if (!response.ok) throw new Error("HTTPエラー: " + response.status);
+
+                const text = await response.text();
+                const jsonStart = text.indexOf("(");
+                const jsonEnd = text.lastIndexOf(")");
+                if (jsonStart === -1 || jsonEnd === -1) throw new Error("レスポンスの形式が正しくありません。");
+
+                const jsonString = text.substring(jsonStart + 1, jsonEnd);
+                const rawData = JSON.parse(jsonString);
+                
+                if (!rawData.table || !rawData.table.cols || !rawData.table.rows) {
+                    throw new Error("スプレッドシートのテーブルデータが見つかりません。");
+                }
+
+                const cols = rawData.table.cols;
+                const rows = rawData.table.rows;
+                const headers = cols.map(c => (c.label || "").toLowerCase().trim());
+
+                // カラムインデックスの判定
+                const getColIdx = (aliases) => headers.findIndex(h => aliases.some(alias => h.includes(alias)));
+
+                const idxNo = getColIdx(["no", "番号", "カード番号"]);
+                const idxThemeEn = getColIdx(["theme_en", "theme(en)", "英語", "テーマ英語", "theme en"]);
+                const idxThemeJa = getColIdx(["theme_ja", "theme(ja)", "日本語", "テーマ日本語", "theme ja"]);
+                const idxSpiritualMeaning = getColIdx(["spiritual_meaning", "霊的意義", "意味", "spiritual meaning"]);
+                const idxPositive = getColIdx(["positive", "正位置", "positive"]);
+                const idxReverse = getColIdx(["reverse", "逆位置", "reverse"]);
+                const idxDescription = getColIdx(["description", "解説", "説明", "description"]);
+                const idxUrlPositive = getColIdx(["url_positive", "url positive", "正位置画像", "正位置url"]);
+                const idxUrlReverse = getColIdx(["url_reverse", "url reverse", "逆位置画像", "逆位置url"]);
+                const idxSpiritualLevel = getColIdx(["spiritual_level", "spiritual level", "霊的レベル"]);
+                const idxDailyLevel = getColIdx(["daily_level", "daily level", "日常レベル", "日常のレベル"]);
+
+                if (idxNo === -1) {
+                    throw new Error("スプレッドシートに 'No' または '番号' 列が見つかりません。");
+                }
+
+                const parsedCards = [];
+                rows.forEach(row => {
+                    const cells = row.c;
+                    const getVal = (idx) => {
+                        if (idx === -1 || !cells || !cells[idx]) return "";
+                        return cells[idx].v !== null ? String(cells[idx].v).trim() : "";
+                    };
+
+                    const noVal = getVal(idxNo);
+                    if (noVal === "") return;
+                    
+                    const no = parseInt(noVal);
+                    if (isNaN(no)) return;
+
+                    parsedCards.push({
+                        no: no,
+                        theme_en: getVal(idxThemeEn),
+                        theme_ja: getVal(idxThemeJa),
+                        spiritual_meaning: getVal(idxSpiritualMeaning),
+                        positive: getVal(idxPositive),
+                        reverse: getVal(idxReverse),
+                        description: getVal(idxDescription),
+                        url_positive: getVal(idxUrlPositive),
+                        url_reverse: getVal(idxUrlReverse),
+                        spiritual_level: getVal(idxSpiritualLevel),
+                        daily_level: getVal(idxDailyLevel)
+                    });
+                });
+
+                if (parsedCards.length === 0) {
+                    throw new Error("有効なカードデータが1件も取得できませんでした。");
+                }
+
+                parsedCards.sort((a, b) => a.no - b.no);
+
+                // CARDS_DATAを書き換える
+                CARDS_DATA.length = 0;
+                parsedCards.forEach(card => CARDS_DATA.push(card));
+                
+                // カード裏面画像を再設定
+                updateCardBackImageUrl();
+
+                // UIの更新
+                updateSyncUI("online", "同期中（オンライン）", `スプレッドシートから ${parsedCards.length} 枚のカードデータを同期しました。`);
+                return true;
+            } catch (err) {
+                console.error("スプレッドシート同期エラー:", err);
+                updateSyncUI("error", "同期エラー", `読み込み失敗: ${err.message} (内蔵データで動作中)`);
+                return false;
+            }
+        }
+
+        // UI表示を切り替えるヘルパー
+        function updateSyncUI(status, statusText, detailText) {
+            const indicator = document.getElementById("sync-status-indicator");
+            if (indicator) {
+                indicator.className = `sync-status-dot ${status}`;
+                indicator.title = statusText;
+            }
+
+            const modalStatus = document.getElementById("settings-sync-status-text");
+            if (modalStatus) {
+                modalStatus.textContent = statusText;
+                if (status === "online") modalStatus.style.color = "#00ff66";
+                else if (status === "error") modalStatus.style.color = "#ff3333";
+                else modalStatus.style.color = "var(--gold)";
+            }
+
+            const modalDetail = document.getElementById("settings-sync-detail-text");
+            if (modalDetail) {
+                modalDetail.innerHTML = detailText;
+            }
+        }
+
+        // 設定の初期化
+        function initSettings() {
+            const syncEnabled = localStorage.getItem("akashic_sync_enabled") === "true";
+            const savedUrl = localStorage.getItem("akashic_sync_url") || "";
+            
+            document.getElementById("sync-enable-toggle").checked = syncEnabled;
+            document.getElementById("sync-spreadsheet-url").value = savedUrl;
+            
+            const urlGroup = document.getElementById("sync-url-group");
+            if (syncEnabled) {
+                urlGroup.style.display = "block";
+                document.getElementById("sync-toggle-label").textContent = "スプレッドシートから同期中";
+                SPREADSHEET_ID = extractSpreadsheetId(savedUrl);
+            } else {
+                urlGroup.style.display = "none";
+                document.getElementById("sync-toggle-label").textContent = "ローカルデータ（内蔵）を使用中";
+                SPREADSHEET_ID = "";
+            }
+
+            // トグル切り替えイベント
+            document.getElementById("sync-enable-toggle").addEventListener("change", function(e) {
+                if (e.target.checked) {
+                    urlGroup.style.display = "block";
+                    document.getElementById("sync-toggle-label").textContent = "スプレッドシートから同期中";
+                } else {
+                    urlGroup.style.display = "none";
+                    document.getElementById("sync-toggle-label").textContent = "ローカルデータ（内蔵）を使用中";
+                }
+            });
+
+            // 設定ボタンクリックイベント
+            document.getElementById("settings-btn").addEventListener("click", () => {
+                document.getElementById("settings-modal").classList.add("active");
+                document.body.style.overflow = "hidden";
+            });
+
+            // 閉じるボタン＆キャンセル
+            const closeSettings = () => {
+                document.getElementById("settings-modal").classList.remove("active");
+                document.body.style.overflow = "";
+            };
+            document.getElementById("settings-close-btn").addEventListener("click", closeSettings);
+            document.getElementById("settings-modal").addEventListener("click", (e) => {
+                if (e.target === document.getElementById("settings-modal")) {
+                    closeSettings();
+                }
+            });
+            
+            // 保存
+            document.getElementById("settings-save-btn").addEventListener("click", async () => {
+                const isEnabled = document.getElementById("sync-enable-toggle").checked;
+                const url = document.getElementById("sync-spreadsheet-url").value;
+                
+                localStorage.setItem("akashic_sync_enabled", isEnabled ? "true" : "false");
+                localStorage.setItem("akashic_sync_url", url);
+                
+                if (isEnabled && url.trim()) {
+                    SPREADSHEET_ID = extractSpreadsheetId(url);
+                    const success = await loadSpreadsheetData();
+                    if (success) {
+                        // データ再描画
+                        renderCardsGrid();
+                        renderSelfPicker();
+                    }
+                } else {
+                    SPREADSHEET_ID = "";
+                    location.reload();
+                }
+                closeSettings();
+            });
+
+            // 接続テスト
+            document.getElementById("settings-test-btn").addEventListener("click", async () => {
+                const url = document.getElementById("sync-spreadsheet-url").value;
+                const testId = extractSpreadsheetId(url);
+                if (!testId) {
+                    alert("スプレッドシートの共有URLまたはIDを入力してください。");
+                    return;
+                }
+                
+                document.getElementById("settings-sync-status-text").textContent = "接続テスト中...";
+                document.getElementById("settings-sync-status-text").style.color = "var(--gold)";
+                
+                const success = await loadSpreadsheetData(testId);
+                if (success) {
+                    alert("スプレッドシートへの接続とデータ同期に成功しました！");
+                } else {
+                    alert("接続に失敗しました。URLまたは共有設定を確認してください。");
+                }
+            });
+        }
+
+        // ==========================================
         // 【起動処理】安全な初期起動ロジック
         // ==========================================
-        function initializeApp() {
+        async function initializeApp() {
             try {
                 // 起動時パスコード認証チェック
                 checkAuthentication();
+                
+                // 設定の初期化
+                initSettings();
+                
+                // スプレッドシート連携が有効な場合はフェッチを実行
+                if (localStorage.getItem("akashic_sync_enabled") === "true") {
+                    await loadSpreadsheetData();
+                }
+
                 // カード一覧の描画
                 renderCardsGrid();
                 // セルフカード選択の初期化
@@ -2725,5 +3023,50 @@
             initializeApp();
         }
     </script>
+
+    <!-- 同期設定モーダル -->
+    <div id="settings-modal" class="modal-overlay" style="display: none;" onclick="if(event.target===this) { this.classList.remove('active'); document.body.style.overflow=''; }">
+        <div class="modal-content" style="max-width: 480px; border: 1.5px solid var(--gold); box-shadow: 0 0 25px rgba(212,175,55,0.25);">
+            <button class="close-btn" onclick="document.getElementById('settings-modal').classList.remove('active'); document.body.style.overflow='';" style="top: 15px; right: 15px;">&times;</button>
+            <h2 class="section-title">データベース同期設定</h2>
+            
+            <div style="display: flex; flex-direction: column; gap: 15px; margin-bottom: 20px;">
+                <div class="form-group">
+                    <label>オンライン同期の有効化</label>
+                    <div class="switch-container">
+                        <label class="switch">
+                            <input type="checkbox" id="sync-enable-toggle">
+                            <span class="slider"></span>
+                        </label>
+                        <span class="switch-label" id="sync-toggle-label">ローカルデータ（内蔵）を使用中</span>
+                    </div>
+                </div>
+                
+                <div class="form-group" id="sync-url-group" style="display: none;">
+                    <label for="sync-spreadsheet-url">Google スプレッドシート共有URL または ID</label>
+                    <input type="text" id="sync-spreadsheet-url" placeholder="https://docs.google.com/spreadsheets/d/.../edit?usp=sharing" style="width: 100%;">
+                    <p style="font-size: 0.65rem; color: var(--text-muted); line-height: 1.3; margin-top: 4px;">
+                        ※スプレッドシートの共有設定を「リンクを知っている全員が閲覧者」に設定し、そのURLを入力してください。
+                    </p>
+                </div>
+
+                <div class="sync-status-box" style="background: rgba(0,0,0,0.3); border: 1px solid var(--border-color); border-radius: 8px; padding: 12px; font-size: 0.75rem;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+                        <span style="color: var(--text-muted);">現在のステータス:</span>
+                        <span id="settings-sync-status-text" style="font-weight: bold; color: var(--gold);">ローカルモード</span>
+                    </div>
+                    <div id="settings-sync-detail-text" style="color: var(--text-muted); line-height: 1.3;">
+                        アプリ内蔵のカードデータ（最終ビルド時点）で動作しています。
+                    </div>
+                </div>
+            </div>
+            
+            <div style="display: flex; justify-content: flex-end; gap: 12px;">
+                <button id="settings-test-btn" class="breath-control-btn" style="background: transparent; border: 1.5px solid var(--gold); color: var(--gold); box-shadow: none; font-size: 0.8rem; padding: 8px 16px;">接続テスト</button>
+                <button id="settings-save-btn" class="breath-control-btn" style="font-size: 0.8rem; padding: 8px 20px;">保存して閉じる</button>
+                <button id="settings-close-btn" class="breath-control-btn" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.15); color: #fff; box-shadow: none; font-size: 0.8rem; padding: 8px 16px;">キャンセル</button>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
