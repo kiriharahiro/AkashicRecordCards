@@ -2652,8 +2652,8 @@ html_content = html_template.replace("cards_json_placeholder", cards_json_str)
 
 # HTMLファイルとして出力 (ルートおよびv.02フォルダの両方に保存)
 output_paths = [
-    r"g:\共有ドライブ\KiriPlayPark\Tool\Antigravity\kiriplaypark-projects\AkashicRecordCard\index.html",
-    r"g:\共有ドライブ\KiriPlayPark\Tool\Antigravity\kiriplaypark-projects\AkashicRecordCard\v.02\index.html"
+    "../index.html",
+"index.html"
 ]
 
 for output_html_path in output_paths:
