@@ -1302,13 +1302,6 @@
 
     <!-- JavaScript 処理 -->
     <script>
-        function safeGetStorage(type, key) {
-            try { return window[type].getItem(key); } catch (e) { return null; }
-        }
-        function safeSetStorage(type, key, value) {
-            try { window[type].setItem(key, value); } catch (e) { console.warn('Storage set failed', e); }
-        }
-        
         // ==========================================
         // 【セキュリティ】パスコード保護機能（暗号ハッシュ化）
         // ==========================================
@@ -1324,7 +1317,7 @@
         }
 
         function checkAuthentication() {
-            const isUnlocked = safeGetStorage('sessionStorage', "akashic_unlocked");
+            const isUnlocked = sessionStorage.getItem("akashic_unlocked");
             const overlay = document.getElementById("passcode-overlay");
             if (isUnlocked === "true") {
                 if (overlay) overlay.style.display = "none";
@@ -1343,7 +1336,7 @@
             const hashedInput = await sha256(value);
             
             if (hashedInput === SECURED_HASH) {
-                safeSetStorage('sessionStorage', "akashic_unlocked", "true");
+                sessionStorage.setItem("akashic_unlocked", "true");
                 const overlay = document.getElementById("passcode-overlay");
                 if (overlay) {
                     overlay.classList.add("fade-out");
@@ -2907,8 +2900,8 @@
 
         // 設定の初期化
         function initSettings() {
-            const syncEnabled = safeGetStorage('localStorage', "akashic_sync_enabled") === "true";
-            const savedUrl = safeGetStorage('localStorage', "akashic_sync_url") || "";
+            const syncEnabled = localStorage.getItem("akashic_sync_enabled") === "true";
+            const savedUrl = localStorage.getItem("akashic_sync_url") || "";
             
             document.getElementById("sync-enable-toggle").checked = syncEnabled;
             document.getElementById("sync-spreadsheet-url").value = savedUrl;
@@ -2958,8 +2951,8 @@
                 const isEnabled = document.getElementById("sync-enable-toggle").checked;
                 const url = document.getElementById("sync-spreadsheet-url").value;
                 
-                safeSetStorage('localStorage', "akashic_sync_enabled", isEnabled ? "true" : "false");
-                safeSetStorage('localStorage', "akashic_sync_url", url);
+                localStorage.setItem("akashic_sync_enabled", isEnabled ? "true" : "false");
+                localStorage.setItem("akashic_sync_url", url);
                 
                 if (isEnabled && url.trim()) {
                     SPREADSHEET_ID = extractSpreadsheetId(url);
@@ -3009,7 +3002,7 @@
                 initSettings();
                 
                 // スプレッドシート連携が有効な場合はフェッチを実行
-                if (safeGetStorage('localStorage', "akashic_sync_enabled") === "true") {
+                if (localStorage.getItem("akashic_sync_enabled") === "true") {
                     await loadSpreadsheetData();
                 }
 
