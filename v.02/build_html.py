@@ -1315,7 +1315,7 @@ html_template = """<!DOCTYPE html>
         // ==========================================
         // 【セキュリティ】パスコード保護機能（暗号ハッシュ化）
         // ==========================================
-        // 「senka8」のSHA-256ハッシュ値
+        // 指定パスコードのSHA-256ハッシュ値
         const SECURED_HASH = "78b2a4390771a5b39027a1354ed19721ba43d20a13eb235b34134b52674f10a2";
 
         // 文字列からSHA-256ハッシュを生成する非同期関数
@@ -1342,7 +1342,7 @@ html_template = """<!DOCTYPE html>
             if (!input) return;
             
             const value = input.value.trim();
-            // 入力値をハッシュ化して比較（senka8そのものはソースコードに含まれません）
+            // 入力値をハッシュ化して比較（パスコード平文はソースコードに含みません）
             const hashedInput = await sha256(value);
             
             if (hashedInput === SECURED_HASH) {

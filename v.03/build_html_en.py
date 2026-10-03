@@ -1322,7 +1322,7 @@ html_template = """<!DOCTYPE html>
         // ==========================================
         // 【セキュリティ】パスコード保護機能（暗号ハッシュ化）
         // ==========================================
-        // 「senka8」のSHA-256ハッシュ値
+        // SHA-256 Hash value for passcode
         const SECURED_HASH = "78b2a4390771a5b39027a1354ed19721ba43d20a13eb235b34134b52674f10a2";
 
         // 文字列からSHA-256ハッシュを生成する非同期関数
@@ -1349,7 +1349,7 @@ html_template = """<!DOCTYPE html>
             if (!input) return;
             
             const value = input.value.trim();
-            // 入力値をハッシュ化して比較（senka8そのものはソースコードに含まれません）
+            // 入力値をハッシュ化して比較（パスコード平文は含みません）
 
             let hashedInput = "";
             try {
@@ -1358,7 +1358,7 @@ html_template = """<!DOCTYPE html>
                 console.warn("crypto API error");
             }
             
-            if (hashedInput === SECURED_HASH || value === "senka8") {
+            if (hashedInput === SECURED_HASH) {
                 safeSetStorage('sessionStorage', "akashic_unlocked", "true");
                 const overlay = document.getElementById("passcode-overlay");
                 if (overlay) {
