@@ -352,49 +352,49 @@
 
         .card-picker-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(75px, 1fr));
-            gap: 10px;
-            max-height: 280px;
-            overflow-y: auto;
-            padding: 10px;
-            border: 1px solid rgba(255,255,255,0.05);
-            border-radius: 10px;
-            background: rgba(0,0,0,0.2);
-            margin-bottom: 15px;
+            grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
+            gap: 12px;
+            max-height: none;
+            overflow-y: visible;
+            padding: 10px 0;
+            margin-bottom: 20px;
         }
 
         .picker-card-item {
             background: rgba(255,255,255,0.02);
-            border: 1px solid rgba(255,255,255,0.05);
-            border-radius: 6px;
-            padding: 5px;
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 8px;
+            padding: 8px 6px;
             text-align: center;
             cursor: pointer;
-            transition: all 0.2s ease;
+            transition: all 0.25s ease;
         }
         .picker-card-item:hover {
+            transform: translateY(-3px);
             border-color: var(--gold);
             background: rgba(212,175,55,0.08);
-            box-shadow: 0 0 10px var(--gold-glow);
+            box-shadow: 0 4px 15px var(--gold-glow);
         }
         .picker-card-item.selected {
-            border: 2.5px solid var(--gold);
-            background: rgba(212,175,55,0.12);
+            border: 2px solid var(--gold);
+            background: rgba(212,175,55,0.15);
             box-shadow: 0 0 15px var(--gold);
+            transform: scale(1.02);
         }
         .picker-card-item img {
             width: 100%;
-            height: 80px;
+            height: 110px;
             object-fit: cover;
-            border-radius: 4px;
-            margin-bottom: 4px;
+            border-radius: 5px;
+            margin-bottom: 6px;
         }
         .picker-card-item div {
-            font-size: 0.65rem;
+            font-size: 0.72rem;
             color: #fff;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
+            line-height: 1.3;
         }
 
         /* スプレッド選択カード型 */
@@ -1083,12 +1083,16 @@
                 <p style="text-align: center; font-size: 0.85rem; color: var(--text-muted); margin-bottom: 15px;">
                     リーディングの「中心軸（中立）」となる、あなた自身（セルフ）のカードを選びます。
                 </p>
+                <div class="wizard-buttons" style="margin-bottom: 15px;">
+                    <button class="breath-control-btn" style="background: transparent; border: 1px solid var(--border-color); color: #fff;" onclick="drawSelfRandom()">ランダムに引く</button>
+                    <button class="breath-control-btn" onclick="nextToSpreadSelect()">次へ進む ➔</button>
+                </div>
                 <div class="card-picker-grid" id="self-picker-grid">
                     <!-- オプションはJSで動的生成 -->
                 </div>
                 <div class="wizard-buttons">
                     <button class="breath-control-btn" style="background: transparent; border: 1px solid var(--border-color); color: #fff;" onclick="drawSelfRandom()">ランダムに引く</button>
-                    <button class="breath-control-btn" onclick="nextToSpreadSelect()">次へ進む</button>
+                    <button class="breath-control-btn" onclick="nextToSpreadSelect()">次へ進む ➔</button>
                 </div>
             </div>
 
