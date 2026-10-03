@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Akashic Records Reading Board (v4.0 EN)</title>
+    <title>Akashic Records Reading Board (EN)</title>
     <!-- Google Fonts の読み込み -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -45,7 +45,7 @@
             background-attachment: fixed;
         }
 
-        /* ヘッダー（固定せずスクロールアップで一緒に流れる） */
+        /* Header (Scrolls naturally with content) */
         header {
             text-align: center;
             padding: 15px 10px;
@@ -67,7 +67,13 @@
             text-shadow: 0 0 10px var(--gold-glow);
         }
 
-        
+        header p {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-top: 3px;
+            letter-spacing: 1px;
+        }
+
         /* Language / Version Switcher */
         .lang-switch-box {
             display: inline-flex;
@@ -101,13 +107,6 @@
             color: var(--border-color);
             font-size: 0.7rem;
             opacity: 0.6;
-        }
-
-        header p {
-            font-size: 0.75rem;
-            color: var(--text-muted);
-            margin-top: 3px;
-            letter-spacing: 1px;
         }
 
         /* 設定＆同期ステータススタイル */
@@ -189,8 +188,7 @@
             background: none;
             border: none;
             outline: none;
-            flex: 1;
-            max-width: 20%;
+            width: 25%;
             height: 100%;
             justify-content: center;
             gap: 2px;
@@ -653,7 +651,7 @@
             object-fit: cover;
         }
 
-        /* 正逆位置のビジュアル表現（逆位置画像はデータベースに元から天地逆さまで用意されているため、二重反転を防ぐため回転は行いません） */
+        /* 正Reversedのビジュアル表現（Reversed画像はデータベースに元から天地逆さまで用意されているため、二重反転を防ぐため回転は行いません） */
         .reversed-img img {
             display: block !important;
         }
@@ -694,9 +692,9 @@
 
         /* 右側スタック(5〜9枚目) */
         .layout-nine .slot-level5 { top: 320px; left: calc(50% + 130px); } /* 内的葛藤 */
-        .layout-nine .slot-level6 { top: 245px; left: calc(50% + 130px); } /* セルフイメージ */
-        .layout-nine .slot-level7 { top: 170px; left: calc(50% + 130px); } /* 外側の葛藤 */
-        .layout-nine .slot-level8 { top: 95px; left: calc(50% + 130px); }  /* 希望と恐れ */
+        .layout-nine .slot-level6 { top: 245px; left: calc(50% + 130px); } /* Self Image */
+        .layout-nine .slot-level7 { top: 170px; left: calc(50% + 130px); } /* Outer Conflict */
+        .layout-nine .slot-level8 { top: 95px; left: calc(50% + 130px); }  /* Hopes & Fears */
         .layout-nine .slot-level9 { top: 20px; left: calc(50% + 130px); }  /* 最終結果 */
 
         /* リアルタイムリーディング詳細パネル */
@@ -757,7 +755,7 @@
             object-fit: cover;
         }
         .reading-card-img-box.reversed-img img {
-            /* データベースの画像がすでに逆位置用なので、二重反転を防ぐため回転は削除 */
+            /* データベースの画像がすでにReversed用なので、二重反転を防ぐため回転は削除 */
         }
         .reading-card-info {
             flex: 1;
@@ -880,7 +878,7 @@
             justify-content: center; align-items: center; padding: 15px;
             backdrop-filter: blur(15px);
         }
-        .modal-overlay.active { display: flex !important; }
+        .modal-overlay.active { display: flex; }
         .modal-content {
             background: var(--card-bg); border: 1px solid var(--border-color);
             border-radius: 16px; max-width: 600px; width: 100%; padding: 25px;
@@ -951,43 +949,7 @@
             margin-bottom: 12px;
             text-shadow: 0 0 15px var(--gold-glow);
         }
-        .passcode-
-        /* Language / Version Switcher */
-        .lang-switch-box {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: rgba(13, 15, 30, 0.65);
-            border: 1px solid var(--border-color);
-            padding: 4px 14px;
-            border-radius: 20px;
-            margin-top: 8px;
-            font-size: 0.72rem;
-            backdrop-filter: blur(5px);
-        }
-        .lang-link {
-            color: var(--text-muted);
-            text-decoration: none;
-            transition: all 0.2s ease;
-            font-weight: 500;
-        }
-        .lang-link:hover {
-            color: var(--gold);
-            text-shadow: 0 0 6px var(--gold-glow);
-        }
-        .lang-link.active {
-            color: var(--gold);
-            font-weight: 700;
-            pointer-events: none;
-            border-bottom: 1.5px solid var(--gold);
-        }
-        .lang-sep {
-            color: var(--border-color);
-            font-size: 0.7rem;
-            opacity: 0.6;
-        }
-
-        header p {
+        .passcode-header p {
             font-size: 0.8rem;
             color: var(--text-muted);
             line-height: 1.6;
@@ -1044,473 +1006,14 @@
             text-shadow: 0 0 5px rgba(255,77,77,0.3);
             margin-top: 5px;
         }
-        /* ==========================================
-        /* 【v4新機能】問い（意図）設定、統合リーディング、履歴スタイル
-        /* ========================================== */
-        .theme-select-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 12px;
-            margin-bottom: 20px;
+        /* ブルブル揺れるエラーアニメーション */
+        .shake {
+            animation: shakeAnim 0.4s ease-in-out;
         }
-        .theme-opt-box {
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 16px 14px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-align: left;
-            position: relative;
-        }
-        .theme-opt-box:hover {
-            border-color: var(--gold);
-            background: rgba(212, 175, 55, 0.05);
-            transform: translateY(-2px);
-        }
-        .theme-opt-box.selected {
-            border-color: var(--gold);
-            background: radial-gradient(circle at top left, rgba(212, 175, 55, 0.15) 0%, rgba(13, 15, 30, 0.6) 100%);
-            box-shadow: 0 0 15px var(--gold-glow);
-        }
-        .theme-opt-box.selected::after {
-            content: "✓";
-            position: absolute;
-            top: 10px;
-            right: 12px;
-            color: var(--gold);
-            font-size: 1rem;
-            font-weight: bold;
-        }
-        .theme-opt-box h3 {
-            font-size: 0.95rem;
-            color: var(--gold);
-            margin-bottom: 4px;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-        .theme-opt-box p {
-            font-size: 0.75rem;
-            color: var(--text-muted);
-            line-height: 1.4;
-            margin: 0;
-        }
-
-        .preset-chips-wrap {
-            margin-bottom: 15px;
-        }
-        .preset-chips-label {
-            font-size: 0.75rem;
-            color: var(--gold);
-            margin-bottom: 8px;
-            display: block;
-        }
-        .preset-chips {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-        }
-        .preset-chip-btn {
-            background: rgba(255, 255, 255, 0.04);
-            border: 1px solid var(--border-color);
-            border-radius: 16px;
-            color: var(--text-color);
-            padding: 6px 12px;
-            font-size: 0.75rem;
-            cursor: pointer;
-            transition: all 0.25s ease;
-        }
-        .preset-chip-btn:hover {
-            border-color: var(--gold);
-            color: var(--gold);
-            background: rgba(212, 175, 55, 0.1);
-        }
-
-        .intent-input-box {
-            width: 100%;
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 12px 16px;
-            color: #fff;
-            font-size: 0.95rem;
-            font-family: inherit;
-            line-height: 1.5;
-            resize: vertical;
-            min-height: 80px;
-            outline: none;
-            transition: border-color 0.3s ease, box-shadow 0.3s ease;
-        }
-        .intent-input-box:focus {
-            border-color: var(--gold);
-            box-shadow: 0 0 15px var(--gold-glow);
-            background: rgba(255, 255, 255, 0.05);
-        }
-
-        /* リーディングボード上部の問い表示バナー */
-        .reading-intent-banner {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            gap: 10px;
-            background: linear-gradient(135deg, rgba(20, 24, 60, 0.7) 0%, rgba(13, 15, 30, 0.8) 100%);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 12px 18px;
-            margin-bottom: 20px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.4);
-        }
-        .intent-info-left {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            flex-wrap: wrap;
-        }
-        .intent-category-tag {
-            background: rgba(212, 175, 55, 0.15);
-            border: 1px solid var(--gold);
-            color: var(--gold);
-            font-size: 0.75rem;
-            font-weight: bold;
-            padding: 3px 10px;
-            border-radius: 12px;
-            letter-spacing: 1px;
-        }
-        .intent-query-text {
-            color: #fff;
-            font-size: 0.95rem;
-            font-weight: 500;
-        }
-
-        /* 統合リーディングパネル */
-        .reading-synthesis-card {
-            background: radial-gradient(circle at 50% 0%, rgba(26, 20, 48, 0.7) 0%, rgba(10, 11, 24, 0.9) 100%);
-            border: 1.5px solid var(--gold);
-            border-radius: 16px;
-            padding: 24px;
-            margin-top: 25px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.6), 0 0 25px rgba(212, 175, 55, 0.15);
-        }
-        .synthesis-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            border-bottom: 1px solid var(--border-color);
-            padding-bottom: 12px;
-            margin-bottom: 18px;
-        }
-        .synthesis-header h3 {
-            font-family: 'Cinzel', serif;
-            color: var(--gold);
-            font-size: 1.15rem;
-            letter-spacing: 2px;
-            text-shadow: 0 0 10px var(--gold-glow);
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            margin: 0;
-        }
-        .synthesis-badge {
-            background: rgba(0, 210, 255, 0.15);
-            border: 1px solid #00d2ff;
-            color: #00d2ff;
-            font-size: 0.7rem;
-            padding: 3px 8px;
-            border-radius: 10px;
-        }
-        .synthesis-body {
-            font-size: 0.92rem;
-            line-height: 1.8;
-            color: var(--text-color);
-            margin-bottom: 20px;
-            white-space: pre-wrap;
-        }
-        .synthesis-section-highlight {
-            background: rgba(255, 255, 255, 0.03);
-            border-left: 3px solid var(--gold);
-            padding: 10px 14px;
-            margin: 12px 0;
-            border-radius: 0 8px 8px 0;
-        }
-
-        /* 振り返りメモ欄 */
-        .reflection-box-wrap {
-            margin-top: 15px;
-            border-top: 1px dashed rgba(255,255,255,0.1);
-            padding-top: 15px;
-        }
-        .reflection-box-label {
-            font-size: 0.8rem;
-            color: var(--gold);
-            margin-bottom: 6px;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        /* アカシックAIメンターセクション */
-        .ai-mentor-box {
-            background: linear-gradient(135deg, rgba(30, 20, 60, 0.45) 0%, rgba(15, 12, 35, 0.75) 100%);
-            border: 1.5px solid rgba(138, 43, 226, 0.45);
-            border-radius: 14px;
-            padding: 18px;
-            margin-top: 20px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4), inset 0 0 15px rgba(138, 43, 226, 0.15);
-        }
-        .ai-mentor-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-bottom: 12px;
-        }
-        .ai-mentor-title {
-            font-size: 0.95rem;
-            font-weight: bold;
-            color: #d8b4fe;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        .ai-mentor-action-btn {
-            background: linear-gradient(135deg, #8a2be2 0%, #4a00e0 100%);
-            border: 1px solid rgba(212, 175, 55, 0.5);
-            color: #fff;
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-size: 0.82rem;
-            cursor: pointer;
-            font-weight: bold;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            box-shadow: 0 0 12px rgba(138, 43, 226, 0.4);
-            transition: all 0.3s ease;
-        }
-        .ai-mentor-action-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 0 20px rgba(138, 43, 226, 0.7);
-        }
-        .ai-mentor-placeholder {
-            font-size: 0.82rem;
-            color: var(--text-muted);
-            line-height: 1.6;
-            background: rgba(0, 0, 0, 0.25);
-            padding: 12px 14px;
-            border-radius: 8px;
-            border: 1px dashed rgba(138, 43, 226, 0.3);
-        }
-        .ai-mentor-loading {
-            text-align: center;
-            padding: 20px;
-        }
-        .spinner-mini {
-            width: 32px;
-            height: 32px;
-            border: 3px solid rgba(212, 175, 55, 0.2);
-            border-top: 3px solid var(--gold);
-            border-radius: 50%;
-            animation: spinMini 1s linear infinite;
-            margin: 0 auto;
-        }
-        @keyframes spinMini {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-        .ai-mentor-response {
-            background: rgba(0, 0, 0, 0.35);
-            border: 1px solid rgba(212, 175, 55, 0.25);
-            border-radius: 10px;
-            padding: 16px;
-            margin-top: 12px;
-        }
-        .ai-markdown-content {
-            font-size: 0.88rem;
-            line-height: 1.8;
-            color: var(--text-color);
-        }
-        .ai-markdown-content h4 {
-            color: var(--gold);
-            margin: 14px 0 6px 0;
-            font-size: 0.96rem;
-            border-bottom: 1px dashed rgba(212, 175, 55, 0.3);
-            padding-bottom: 4px;
-        }
-        .ai-markdown-content p {
-            margin-bottom: 8px;
-        }
-        .ai-markdown-content ul, .ai-markdown-content ol {
-            padding-left: 20px;
-            margin-bottom: 10px;
-        }
-        .ai-markdown-content li {
-            margin-bottom: 4px;
-        }
-        .ai-markdown-content strong {
-            color: #fef08a;
-        }
-        .ai-markdown-content blockquote {
-            border-left: 3px solid var(--gold);
-            background: rgba(212, 175, 55, 0.06);
-            padding: 8px 12px;
-            margin: 8px 0;
-            border-radius: 0 6px 6px 0;
-            color: #e2e8f0;
-        }
-        .ai-followup-wrap {
-            margin-top: 16px;
-            border-top: 1px dashed rgba(255, 255, 255, 0.12);
-            padding-top: 14px;
-        }
-
-        /* アクションツールバー */
-        .io-action-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 10px;
-            margin-top: 18px;
-        }
-        .io-btn {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid var(--border-color);
-            border-radius: 10px;
-            padding: 10px 14px;
-            color: #fff;
-            font-size: 0.8rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-        }
-        .io-btn:hover {
-            background: rgba(212, 175, 55, 0.15);
-            border-color: var(--gold);
-            color: var(--gold);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.2);
-        }
-        .io-btn-primary {
-            background: linear-gradient(135deg, var(--gold) 0%, #b8860b 100%);
-            color: #05060b;
-            font-weight: bold;
-            border: none;
-            box-shadow: 0 4px 15px var(--gold-glow);
-        }
-        .io-btn-primary:hover {
-            background: linear-gradient(135deg, #e5c158 0%, #d4af37 100%);
-            color: #05060b;
-        }
-
-        /* トースト通知 */
-        .toast-notice {
-            position: fixed;
-            bottom: 80px;
-            left: 50%;
-            transform: translateX(-50%) translateY(20px);
-            background: rgba(13, 15, 30, 0.95);
-            border: 1px solid var(--gold);
-            box-shadow: 0 0 25px var(--gold-glow), 0 8px 30px rgba(0,0,0,0.8);
-            border-radius: 25px;
-            padding: 10px 22px;
-            color: #fff;
-            font-size: 0.85rem;
-            font-weight: 500;
-            z-index: 100000;
-            opacity: 0;
-            pointer-events: none;
-            transition: all 0.35s cubic-bezier(0.25, 0.8, 0.25, 1);
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        .toast-notice.show {
-            opacity: 1;
-            transform: translateX(-50%) translateY(0);
-        }
-
-        /* 履歴ビュー（ジャーナル）スタイル */
-        .history-card {
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid var(--border-color);
-            border-radius: 14px;
-            padding: 18px;
-            margin-bottom: 16px;
-            transition: all 0.3s ease;
-        }
-        .history-card:hover {
-            border-color: rgba(212, 175, 55, 0.4);
-            background: rgba(255, 255, 255, 0.04);
-        }
-        .history-card-top {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 8px;
-            flex-wrap: wrap;
-            gap: 8px;
-        }
-        .history-date {
-            font-size: 0.75rem;
-            color: var(--text-muted);
-        }
-        .history-query {
-            font-size: 1rem;
-            font-weight: bold;
-            color: #fff;
-            margin-bottom: 10px;
-        }
-        .history-cards-preview {
-            display: flex;
-            gap: 8px;
-            overflow-x: auto;
-            padding: 6px 0;
-            margin-bottom: 12px;
-        }
-        .history-mini-card {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 4px;
-            min-width: 65px;
-            max-width: 75px;
-            text-align: center;
-        }
-        .history-mini-card img {
-            width: 50px;
-            height: 75px;
-            border-radius: 6px;
-            border: 1px solid var(--border-color);
-            object-fit: cover;
-        }
-        .history-mini-card span {
-            font-size: 0.62rem;
-            color: var(--text-muted);
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            width: 100%;
-        }
-        .history-synthesis-preview {
-            font-size: 0.8rem;
-            color: var(--text-muted);
-            line-height: 1.5;
-            background: rgba(0,0,0,0.25);
-            border-radius: 8px;
-            padding: 10px 12px;
-            margin-bottom: 12px;
-            max-height: 80px;
-            overflow-y: hidden;
-            position: relative;
-        }
-        .history-actions-row {
-            display: flex;
-            justify-content: flex-end;
-            gap: 8px;
+        @keyframes shakeAnim {
+            0%, 100% { transform: translateX(0); }
+            20%, 60% { transform: translateX(-8px); }
+            40%, 80% { transform: translateX(8px); }
         }
     </style>
 </head>
@@ -1521,10 +1024,10 @@
         <div class="passcode-card">
             <div class="passcode-header">
                 <h2>Akashic Records</h2>
-                <p>To access the Akashic Reading Chamber<br>please enter the security passcode</p>
+                <p>Please enter the security code<br>to access the reading board</p>
             </div>
             <div class="passcode-form">
-                <input type="password" id="passcode-input" placeholder="Enter security passcode" autofocus onkeydown="if(event.key === 'Enter') submitPasscode()">
+                <input type="password" id="passcode-input" placeholder="Enter security code" autofocus onkeydown="if(event.key === 'Enter') submitPasscode()">
                 <button class="passcode-submit-btn" onclick="submitPasscode()">Unlock</button>
                 <div id="passcode-error" class="passcode-error-msg"></div>
             </div>
@@ -1540,15 +1043,15 @@
                 <div class="lang-switch-box">
                     <a href="index.html" class="lang-link" title="Japanese (v4.0 Latest)">🇯🇵 日本語 (v4)</a>
                     <span class="lang-sep">|</span>
-                    <a href="index_en.html" class="lang-link active" title="English (v4.0 Latest)">🇺🇸 English (v4)</a>
+                    <a href="index_en.html" class="lang-link" title="English (v4.0 Latest)">🇺🇸 English (v4)</a>
                     <span class="lang-sep">|</span>
-                    <a href="index_en_v3.html" class="lang-link" title="English (v3.0 Legacy)">🇺🇸 English (v3)</a>
+                    <a href="index_en_v3.html" class="lang-link active" title="English (v3.0 Legacy)">🇺🇸 English (v3)</a>
                 </div>
             </div>
-            <!-- Settings & status icons -->
+            <!-- 設定＆ステータスアイコンを右上に配置 -->
             <div class="header-controls" style="position: absolute; right: 10px; display: flex; align-items: center; gap: 10px;">
                 <span id="sync-status-indicator" class="sync-status-dot offline" title="Using Local Data"></span>
-                <button id="settings-btn" class="settings-btn" title="Settings & AI Config" onclick="openSettingsModal()" style="background: none; border: none; color: var(--gold); font-size: 1.3rem; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: transform 0.3s ease;">⚙️</button>
+                <button id="settings-btn" class="settings-btn" title="Sync Settings" style="background: none; border: none; color: var(--gold); font-size: 1.3rem; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: transform 0.3s ease;">⚙️</button>
             </div>
         </div>
     </header>
@@ -1565,9 +1068,9 @@
                     <h2 class="section-title">Preparation: Rhythmic Breathing</h2>
                     <div class="breath-wrapper">
                         <p style="text-align: center; font-size: 0.85rem; color: var(--text-muted); max-width: 480px; line-height: 1.5;">
-                            Set your intent before the session and establish a neutral physical and conscious state through rhythmic breathing.<br>
+                            Before the session, set your 'intention' and create a neutral state of body and consciousness through breathing.<br>
                             <strong>Inhale (7s) ➔ Hold (5s) ➔ Exhale (12s)</strong><br>
-                            Breathe in harmony with the gentle 60 bpm tick-tock rhythm.
+                            Let's do rhythmic breathing together.
                         </p>
                         
                         <div class="breath-circle-outer">
@@ -1579,10 +1082,10 @@
                         </div>
 
                         <div style="display: flex; flex-direction: column; align-items: center; gap: 10px;">
-                            <button class="breath-control-btn" id="breath-btn" onclick="toggleBreathing()">Start Breathing</button>
+                            <button class="breath-control-btn" id="breath-btn" onclick="toggleBreathing()">Start Meditation</button>
                             <div class="sound-toggle-box">
                                 <input type="checkbox" id="sound-chk" checked>
-                                <label for="sound-chk">Play Rhythm Ticking Sound</label>
+                                <label for="sound-chk">Play ticking sound</label>
                             </div>
                         </div>
                     </div>
@@ -1593,8 +1096,8 @@
                     <h2 class="section-title">Session & Integration Timer</h2>
                     <div class="breath-wrapper" style="gap: 15px;">
                         <p style="text-align: center; font-size: 0.85rem; color: var(--text-muted); max-width: 480px; line-height: 1.5;">
-                            Used for focused contemplation during readings and the recommended 10-minute integration meditation after drawing cards.<br>
-                            A gentle chime will ring at 10 minutes, while the timer continues smoothly.
+                            Use for focused time during reading or 'Integration Meditation' for 10 minutes after drawing cards.<br>
+                            An alarm will sound after 10 minutes, but the timer and session will continue without ending.
                         </p>
                         
                         <div style="font-family: 'Cinzel', serif; font-size: 3rem; font-weight: 700; color: var(--gold); text-shadow: 0 0 15px var(--gold-glow); letter-spacing: 2px;" id="session-timer-display">
@@ -1610,109 +1113,62 @@
             </div>
 
             <div class="wizard-buttons" style="margin-top: 25px;">
-                <button class="breath-control-btn" style="background: linear-gradient(135deg, var(--gold) 0%, #b8860b 100%); color:#05060b; width: 100%; max-width: 320px;" onclick="skipToReading()">Enter Reading Chamber ➔</button>
+                <button class="breath-control-btn" style="background: linear-gradient(135deg, var(--gold) 0%, #b8860b 100%); color:#05060b; width: 100%; max-width: 320px;" onclick="skipToReading()">Enter Reading Room ➔</button>
             </div>
         </div>
 
         <!-- 【画面2】リーディングボード (🔮 Reading) -->
         <div id="view-reading" class="app-view">
-            <!-- ウィザード1: 問い・意図（テーマ）の設定 -->
-            <div id="step-intent" class="glass-panel wizard-step active">
-                <h2 class="section-title">Step 1: Set Intent & Inquiring Theme</h2>
+            <!-- ウィザード1: セルフカードの設定 -->
+            <div id="step-self" class="glass-panel wizard-step active">
+                <h2 class="section-title">Step 1: Select Self Card</h2>
                 <p style="text-align: center; font-size: 0.85rem; color: var(--text-muted); margin-bottom: 15px;">
-                    Clarify your soul intention and focus your awareness in neutral stillness.
-                </p>
-
-                <!-- テーマカテゴリ選択 -->
-                <div class="theme-select-grid">
-                    <div class="theme-opt-box selected" id="theme-cat-self" onclick="selectThemeCategory('self_discovery')">
-                        <h3>🧘 Self-Exploration</h3>
-                        <p>Soul purpose, inner realizations, current spiritual phase</p>
-                    </div>
-                    <div class="theme-opt-box" id="theme-cat-practical" onclick="selectThemeCategory('practical')">
-                        <h3>💼 Life & Reality</h3>
-                        <p>Career, relationships, decision-making and obstacles</p>
-                    </div>
-                    <div class="theme-opt-box" id="theme-cat-future" onclick="selectThemeCategory('future')">
-                        <h3>🌌 Future Potentials</h3>
-                        <p>New openings, upcoming directions, latent potential</p>
-                    </div>
-                    <div class="theme-opt-box" id="theme-cat-custom" onclick="selectThemeCategory('custom')">
-                        <h3>✍️ Free Inquiry</h3>
-                        <p>Formulate your specific question or consultation in your own words</p>
-                    </div>
-                </div>
-
-                <!-- 問いのプリセットチップ -->
-                <div class="preset-chips-wrap">
-                    <span class="preset-chips-label">▼ Choose a Core Inquiry (Click to fill):</span>
-                    <div class="preset-chips" id="preset-chips-container">
-                        <!-- JSでカテゴリに応じて動的切り替え -->
-                    </div>
-                </div>
-
-                <!-- 質問テキスト入力欄 -->
-                <div style="margin-bottom: 20px;">
-                    <textarea id="intent-query-input" class="intent-input-box" placeholder="Enter the question or theme you wish to explore now..."></textarea>
-                </div>
-
-                <div class="wizard-buttons">
-                    <button class="breath-control-btn" style="background: linear-gradient(135deg, var(--gold) 0%, #b8860b 100%); color:#05060b; width: 100%; max-width: 320px;" onclick="nextToSelfSelect()">Next: Select Self Card ➔</button>
-                </div>
-            </div>
-
-            <!-- ウィザード2: セルフカードの設定 -->
-            <div id="step-self" class="glass-panel wizard-step">
-                <h2 class="section-title">Step 2: Select Self Card (Significator)</h2>
-                <p style="text-align: center; font-size: 0.85rem; color: var(--text-muted); margin-bottom: 15px;">
-                    Choose the card representing your current essence (Self), serving as the neutral axis of the reading.
+                    Select your own (Self) card, which will be the 'center axis (neutral)' of the reading.
                 </p>
                 <div class="wizard-buttons" style="margin-bottom: 15px;">
-                    <button class="breath-control-btn" style="background: transparent; border: 1px solid var(--border-color); color: #fff;" onclick="prevToIntentSelect()">⬅ Back</button>
                     <button class="breath-control-btn" style="background: transparent; border: 1px solid var(--border-color); color: #fff;" onclick="drawSelfRandom()">Draw Randomly</button>
-                    <button class="breath-control-btn" onclick="nextToSpreadSelect()">Proceed Next ➔</button>
+                    <button class="breath-control-btn" onclick="nextToSpreadSelect()">Next ➔</button>
                 </div>
                 <div class="card-picker-grid" id="self-picker-grid">
                     <!-- オプションはJSで動的生成 -->
                 </div>
                 <div class="wizard-buttons">
-                    <button class="breath-control-btn" style="background: transparent; border: 1px solid var(--border-color); color: #fff;" onclick="prevToIntentSelect()">⬅ Back</button>
                     <button class="breath-control-btn" style="background: transparent; border: 1px solid var(--border-color); color: #fff;" onclick="drawSelfRandom()">Draw Randomly</button>
-                    <button class="breath-control-btn" onclick="nextToSpreadSelect()">Proceed Next ➔</button>
+                    <button class="breath-control-btn" onclick="nextToSpreadSelect()">Next ➔</button>
                 </div>
             </div>
 
-            <!-- ウィザード3: スプレッドの選択 -->
+            <!-- ウィザード2: スプレッドの選択 -->
             <div id="step-spread" class="glass-panel wizard-step">
-                <h2 class="section-title">Step 3: Choose Spread Architecture</h2>
+                <h2 class="section-title">Step 2: Choose Spread</h2>
                 <p style="text-align: center; font-size: 0.85rem; color: var(--text-muted); margin-bottom: 15px;">
-                    Select the official spread architecture aligned with your intention.
+                    Choose a spread according to the intention of your reading.
                 </p>
                 <div class="spread-select-grid">
                     <div class="spread-opt-box selected" id="opt-one" onclick="selectSpreadType('one')">
-                        <h3>1-Card Insight (Awareness)</h3>
-                        <p>A focused spread to discern today's essential theme, laid over your Self Card.</p>
+                        <h3>1-Card Draw for Self</h3>
+                        <p>A spread to know today's theme. Expand 1 card on top of the Self card.</p>
                     </div>
                     <div class="spread-opt-box" id="opt-four" onclick="selectSpreadType('four')">
-                        <h3>4-Card Spread (Transformation)</h3>
-                        <p>Deep insight into current challenges: Block, Past Attitude, Immediate Influence, and Outcome.</p>
+                        <h3>4-Card Spread (Insight)</h3>
+                        <p>When you want to gain deep insight into a current issue. Expand Block, Past attitude, Present influence, and Outcome.</p>
                     </div>
                     <div class="spread-opt-box" id="opt-nine" onclick="selectSpreadType('nine')">
-                        <h3>9-Card Akashic Gate (Multidimensional)</h3>
-                        <p>Illuminates 9 distinct dimensional levels: Inner conflict, self-image, external friction, karmic origin, and spiritual awakening.</p>
+                        <h3>9-Card Spread (Multi-Dimensional)</h3>
+                        <p>Unravel the influence on the issue from 9 different dimensional levels.</p>
                     </div>
                 </div>
                 <div class="wizard-buttons">
-                    <button class="breath-control-btn" style="background: transparent; border: 1px solid var(--border-color); color: #fff;" onclick="prevToSelfSelect()">⬅ Back</button>
-                    <button class="breath-control-btn" onclick="nextToShuffle()">Proceed Next ➔</button>
+                    <button class="breath-control-btn" style="background: transparent; border: 1px solid var(--border-color); color: #fff;" onclick="prevToSelfSelect()">Back</button>
+                    <button class="breath-control-btn" onclick="nextToShuffle()">Next</button>
                 </div>
             </div>
 
-            <!-- ウィザード4: シャッフル ＆ カット -->
+            <!-- ウィザード3: シャッフル ＆ カット -->
             <div id="step-shuffle" class="glass-panel wizard-step">
-                <h2 class="section-title">Step 4: Shuffle & Cut</h2>
+                <h2 class="section-title">Step 3: Shuffle & Cut</h2>
                 <p style="text-align: center; font-size: 0.85rem; color: var(--text-muted);">
-                    Holding your intention in stillness, shuffle the deck and stack the cards.
+                    While setting your intention, shuffle the cards and stack them.
                 </p>
                 <div class="shuffle-zone" id="shuffle-zone-el">
                     <div class="shuffle-card-shadow"></div>
@@ -1720,25 +1176,13 @@
                     <div class="shuffle-card-shadow"></div>
                 </div>
                 <div class="wizard-buttons">
-                    <button class="breath-control-btn" style="background: transparent; border: 1px solid var(--border-color); color: #fff;" onclick="prevToSpreadSelect()">⬅ Back</button>
-                    <button class="breath-control-btn" id="shuffle-act-btn" onclick="runShuffle()">Shuffle the Deck</button>
-                    <button class="breath-control-btn" id="draw-act-btn" style="display: none;" onclick="runDeal()">Deal the Cards</button>
+                    <button class="breath-control-btn" id="shuffle-act-btn" onclick="runShuffle()">Shuffle Cards</button>
+                    <button class="breath-control-btn" id="draw-act-btn" style="display: none;" onclick="runDeal()">Deal Cards</button>
                 </div>
             </div>
 
             <!-- スプレッドボード本体 (カード展開エリア) -->
             <div id="reading-board-container" class="glass-panel" style="display: none;">
-                <!-- 問い（意図）の確認バナー -->
-                <div class="reading-intent-banner" id="reading-intent-banner-el">
-                    <div class="intent-info-left">
-                        <span class="intent-category-tag" id="board-intent-cat">🧘 Self-Exploration</span>
-                        <span class="intent-query-text" id="board-intent-query">What essential awareness does my soul need right now?</span>
-                    </div>
-                    <div style="display: flex; gap: 8px;">
-                        <button class="breath-control-btn" style="padding: 6px 12px; font-size: 0.75rem; background: rgba(255,255,255,0.06); border: 1px solid var(--border-color); color: #fff;" onclick="revealAllCards()">Reveal All Cards 🎴</button>
-                    </div>
-                </div>
-
                 <h2 class="section-title" id="board-title-display">Reading Board</h2>
                 
                 <div class="spread-board">
@@ -1747,11 +1191,11 @@
                     </div>
                 </div>
 
-                <!-- リアルタイムリーディング個別カード詳細パネル -->
+                <!-- リアルタイムリーディング詳細パネル -->
                 <div class="reading-panel" id="reading-panel-el">
                     <div class="reading-slot-header">
-                        <div class="reading-slot-role" id="panel-slot-role">Role & Position</div>
-                        <div class="reading-slot-desc" id="panel-slot-desc">What energy is active here?</div>
+                        <div class="reading-slot-role" id="panel-slot-role">Block / Obstacle</div>
+                        <div class="reading-slot-desc" id="panel-slot-desc">What is blocking me?</div>
                     </div>
                     <div class="reading-card-grid">
                         <div class="reading-card-img-box" id="panel-card-img-box">
@@ -1760,103 +1204,23 @@
                         <div class="reading-card-info">
                             <div class="reading-card-title" id="panel-card-title">Gateway</div>
                             <div class="reading-badge-container">
-                                <span class="position-badge badge-positive" id="panel-pos-badge">Upright</span>
+                                <span class="position-badge badge-positive" id="panel-pos-badge">Positive</span>
                                 <span id="panel-levels"></span>
                             </div>
                             <div class="card-meaning-box" id="panel-meaning-box" style="margin-top: 5px; margin-bottom: 10px;">
-                                <div class="card-meaning-title" id="panel-meaning-title">Oracle Message</div>
+                                <div class="card-meaning-title" id="panel-meaning-title">Message</div>
                                 <div id="panel-card-meaning">Meaning</div>
                             </div>
-                            <div class="modal-section-title" style="margin-top: 10px; font-size: 0.8rem;">Detailed Interpretation</div>
+                            <div class="modal-section-title" style="margin-top: 10px; font-size: 0.8rem;">Detailed Description</div>
                             <div class="modal-text" id="panel-card-desc" style="font-size: 0.85rem; line-height: 1.6; margin-top: 5px;">
-                                Interpretation
+                                Description text
                             </div>
                         </div>
-                    </div>
-                </div>
-
-                <!-- 統合リーディングパネル（総合解説・AIプロンプト・振り返り） -->
-                <div class="reading-synthesis-card" id="reading-synthesis-card-el">
-                    <div class="synthesis-header">
-                        <h3><span>✨</span> Akashic Synthesis (Integrated Soul Guidance)</h3>
-                        <span class="synthesis-badge" id="synthesis-spread-badge">4-Card Spread (Transformation)</span>
-                    </div>
-                    <div class="synthesis-body" id="synthesis-text-el">
-                        <!-- JSで動的生成 -->
-                    </div>
-
-                    <!-- 【新機能】アカシックAIメンター深層コメントエリア -->
-                    <div class="ai-mentor-box" id="ai-mentor-box-el">
-                        <div class="ai-mentor-header">
-                            <div class="ai-mentor-title">
-                                <span>🔮</span>
-                                <span>Akashic AI Mentor: Deep Oracle Guidance</span>
-                            </div>
-                            <button class="ai-mentor-action-btn" id="btn-fetch-ai-comment" onclick="requestAIMentorComment()">
-                                <span>✨</span> Receive AI Oracle Message
-                            </button>
-                        </div>
-                        
-                        <div id="ai-mentor-status-placeholder" class="ai-mentor-placeholder">
-                            <div style="margin-bottom: 8px;">
-                                Receive a personalized soul oracle message from the Akashic AI Mentor based on your drawn cards and intention.
-                            </div>
-                            <div style="display: flex; gap: 8px; flex-wrap: wrap; align-items: center;">
-                                <button type="button" class="breath-control-btn" style="padding: 6px 14px; font-size: 0.78rem; background: rgba(138,43,226,0.3); border: 1px solid #a855f7; color: #fff;" onclick="openSettingsModal()">
-                                    ⚙️ Configure Gemini API Key
-                                </button>
-                                <span style="font-size: 0.72rem; color: var(--text-muted);">(* Enter your free API key from Google AI Studio)</span>
-                            </div>
-                        </div>
-
-                        <div id="ai-mentor-loading" class="ai-mentor-loading" style="display: none;">
-                            <div class="spinner-mini"></div>
-                            <div style="font-size: 0.85rem; color: var(--gold); margin-top: 10px;">Channeling deep oracle insights from the Akashic field...</div>
-                        </div>
-
-                        <div id="ai-mentor-response" class="ai-mentor-response" style="display: none;">
-                            <div id="ai-mentor-content" class="ai-markdown-content"></div>
-                            
-                            <!-- フォローアップ対話欄 -->
-                            <div class="ai-followup-wrap" id="ai-followup-wrap">
-                                <div style="font-size: 0.8rem; font-weight: bold; color: var(--gold); margin-bottom: 6px; display: flex; align-items: center; gap: 6px;">
-                                    <span>💬</span> Follow-up Dialogue with AI Mentor
-                                </div>
-                                <div style="display: flex; gap: 8px; flex-wrap: wrap;">
-                                    <input type="text" id="ai-followup-input" class="intent-input-box" style="flex: 1; min-width: 200px; margin: 0; padding: 8px 12px; font-size: 0.85rem;" placeholder="e.g., How can I practically ground this guidance in my daily routine?" onkeydown="if(event.key==='Enter') sendAIFollowup()">
-                                    <button class="breath-control-btn" style="font-size: 0.8rem; padding: 8px 16px; white-space: nowrap;" id="btn-send-followup" onclick="sendAIFollowup()">Send Question</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- 自己振り返りメモ欄（ジャーナル） -->
-                    <div class="reflection-box-wrap">
-                        <div class="reflection-box-label">
-                            <span>📝</span> Personal Reflection & Integration Journal
-                        </div>
-                        <textarea id="reflection-notes-input" class="intent-input-box" style="min-height: 60px;" placeholder="Record your intuitive reflections, emotions, or daily practices inspired by this reading..."></textarea>
-                    </div>
-
-                    <!-- 拡張可能 I/O ツールバー -->
-                    <div class="io-action-grid">
-                        <button class="io-btn io-btn-primary" onclick="ReadingRecordIO.copyPrompt()">
-                            <span>📋</span> Copy AI Prompt
-                        </button>
-                        <button class="io-btn" onclick="ReadingRecordIO.copyMarkdown()">
-                            <span>📝</span> Copy Markdown
-                        </button>
-                        <button class="io-btn" onclick="ReadingRecordIO.saveCurrentToHistory()">
-                            <span>💾</span> Save to History
-                        </button>
-                        <button class="io-btn" onclick="ReadingRecordIO.exportCurrentJSON()">
-                            <span>📥</span> Export JSON
-                        </button>
                     </div>
                 </div>
 
                 <div class="wizard-buttons" style="margin-top: 20px;">
-                    <button class="breath-control-btn" style="background: transparent; border: 1px solid var(--border-color); color: #fff;" onclick="resetReadingSession()">Start New Reading Session</button>
+                    <button class="breath-control-btn" style="background: transparent; border: 1px solid var(--border-color); color: #fff;" onclick="resetReadingSession()">Read Again</button>
                 </div>
             </div>
         </div>
@@ -1866,15 +1230,15 @@
             <div class="glass-panel" style="max-width: 600px; margin-left: auto; margin-right: auto;">
                 <h2 class="section-title">Manual Slot Setting</h2>
                 <p style="text-align: center; font-size: 0.8rem; color: var(--text-muted); margin-bottom: 15px;">
-                    Place cards manually into spread slots to inspect layouts and interpretations.
+                    You can manually place any card in the spread position to check the reading.
                 </p>
                 <div class="form-grid" style="grid-template-columns: 1fr; gap: 15px;">
                     <div class="form-group">
-                        <label for="manual-spread-select">Selected Spread</label>
+                        <label for="manual-spread-select">Spread to expand</label>
                         <select id="manual-spread-select" onchange="adjustManualFormFields()">
-                            <option value="one">1-Card Insight (Awareness)</option>
-                            <option value="four">4-Card Spread (Transformation)</option>
-                            <option value="nine">9-Card Akashic Gate (Multidimensional)</option>
+                            <option value="one">1-Card Draw for Self</option>
+                            <option value="four">4-Card Spread (Insight)</option>
+                            <option value="nine">9-Card Spread (Multi-Dimensional)</option>
                         </select>
                     </div>
 
@@ -1883,7 +1247,7 @@
                         <!-- ここにスロットごとのドロップダウン＆トグルが追加されます -->
                     </div>
 
-                    <button class="draw-btn apply-btn" style="margin-top: 15px;" onclick="applyManualReading()">Apply to Spread Board</button>
+                    <button class="draw-btn apply-btn" style="margin-top: 15px;" onclick="applyManualReading()">Expand on the spread board with this setting</button>
                 </div>
             </div>
         </div>
@@ -1903,29 +1267,12 @@
                     <!-- JSで動的生成 -->
                 </div>
             </div>
-        <!-- 【画面5】リーディング履歴・ジャーナル (📜 History) -->
-        <div id="view-history" class="app-view">
-            <div class="glass-panel" style="max-width: 800px; margin: 0 auto;">
-                <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color); padding-bottom: 12px; margin-bottom: 18px; flex-wrap: wrap; gap: 10px;">
-                    <h2 class="section-title" style="margin: 0; border: none; padding: 0;">Reading History & Journal</h2>
-                    <div style="display: flex; gap: 8px;">
-                        <button class="breath-control-btn" style="padding: 6px 12px; font-size: 0.75rem; background: rgba(255,255,255,0.06); border: 1px solid var(--border-color); color: #fff;" onclick="ReadingRecordIO.exportAllHistoryJSON()">Export All JSON 📥</button>
-                        <button class="breath-control-btn" style="padding: 6px 12px; font-size: 0.75rem; background: rgba(255,50,50,0.1); border: 1px solid rgba(255,50,50,0.3); color: #ff8888;" onclick="clearAllHistory()">Clear All History 🗑️</button>
-                    </div>
-                </div>
-                <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 18px; line-height: 1.5;">
-                    Review your past reading journeys chronologically. Re-copy AI prompts or export JSON records at any time.
-                </p>
-                <div id="history-list-container">
-                    <!-- 履歴リストはJSで動的生成 -->
-                </div>
-            </div>
         </div>
 
         <!-- 著作権の注意書き（下部） -->
         <div class="copyright-notice">
-            Notice: All copyrights for the Akashic Record Cards belong to Gary Bonnell.<br>
-            This application is created for personal study and contemplative research. Commercial reproduction and distribution are strictly prohibited.
+            Note: The copyright of the Akashic Record Cards is owned by Gary Bonnell.<br>
+            This app is created for personal use and research purposes. Unauthorized reproduction or distribution for commercial purposes is strictly prohibited.
         </div>
 
     </main>
@@ -1951,7 +1298,7 @@
 
                     <div class="modal-section">
                         <div class="modal-section-title">Spiritual Meaning</div>
-                        <div class="modal-text" id="modal-spiritual-meaning">Initiation / Transition.</div>
+                        <div class="modal-text" id="modal-spiritual-meaning">Time of change.</div>
                     </div>
 
                     <div class="modal-section" id="modal-levels-container">
@@ -1959,18 +1306,18 @@
                     </div>
 
                     <div class="modal-section">
-                        <div class="modal-section-title">Upright Meaning</div>
-                        <div class="modal-text" id="modal-meaning-pos">The Beginning.</div>
+                        <div class="modal-section-title">Positive Meaning</div>
+                        <div class="modal-text" id="modal-meaning-pos">Beginning.</div>
                     </div>
 
                     <div class="modal-section">
-                        <div class="modal-section-title">Reversed Meaning</div>
+                        <div class="modal-section-title">Reverse Meaning</div>
                         <div class="modal-text" id="modal-meaning-rev">Breaking old agreements.</div>
                     </div>
 
                     <div class="modal-section">
-                        <div class="modal-section-title">Detailed Interpretation</div>
-                        <div class="modal-text" id="modal-description">Detailed card interpretation will appear here.</div>
+                        <div class="modal-section-title">Detailed Description</div>
+                        <div class="modal-text" id="modal-description">Description text goes here.</div>
                     </div>
                 </div>
 
@@ -1996,17 +1343,7 @@
             <span class="nav-icon">📖</span>
             <span>Cards</span>
         </button>
-        <button class="nav-item" onclick="switchView('history', this)">
-            <span class="nav-icon">📜</span>
-            <span>History</span>
-        </button>
     </nav>
-
-    <!-- トースト通知ポップアップ -->
-    <div id="toast-notice" class="toast-notice">
-        <span id="toast-icon">✓</span>
-        <span id="toast-msg">Copied to clipboard!</span>
-    </div>
 
     <!-- JavaScript 処理 -->
     <script>
@@ -2018,9 +1355,9 @@
         }
         
         // ==========================================
-        // 【セキュリティ】パスコード保護機能（暗号ハッシュ化）
+        // 【Security】Passcode Protection (Cryptographic Hash)
         // ==========================================
-        // 指定パスコードのSHA-256ハッシュ値
+        // SHA-256 Hash value for passcode
         const SECURED_HASH = "78b2a4390771a5b39027a1354ed19721ba43d20a13eb235b34134b52674f10a2";
 
         // 文字列からSHA-256ハッシュを生成する非同期関数
@@ -2047,8 +1384,14 @@
             if (!input) return;
             
             const value = input.value.trim();
-            // 入力値をハッシュ化して比較（パスコード平文はソースコードに含みません）
-            const hashedInput = await sha256(value);
+            // 入力値をハッシュ化して比較（パスコード平文は含みません）
+
+            let hashedInput = "";
+            try {
+                hashedInput = await sha256(value);
+            } catch(e) {
+                console.warn("crypto API error");
+            }
             
             if (hashedInput === SECURED_HASH) {
                 safeSetStorage('sessionStorage', "akashic_unlocked", "true");
@@ -2060,7 +1403,7 @@
                     }, 400);
                 }
             } else {
-                error.textContent = "Incorrect security passcode.";
+                error.textContent = "Incorrect passcode.";
                 input.value = "";
                 input.focus();
                 
@@ -2649,7 +1992,7 @@
                 clearInterval(breathState.intervalId);
                 breathState.isRunning = false;
                 breathState.phase = 'ready';
-                btn.textContent = "Start Breathing";
+                btn.textContent = "Start Meditation";
                 circle.className = "breath-circle-inner";
                 glow.style.transform = "scale(0.6)";
                 glow.style.opacity = "0.3";
@@ -2658,7 +2001,7 @@
             } else {
                 // 開始処理
                 breathState.isRunning = true;
-                btn.textContent = "Pause Breathing";
+                btn.textContent = "Pause Meditation";
                 
                 // 最初の呼吸サイクル開始 (吸う)
                 startBreathPhase('inhale');
@@ -2868,168 +2211,46 @@
         }
 
         // ==========================================
-        // ==========================================
-        // 【v4新機能】リーディングセッションウィザード＆拡張I/O
+        // 【新機能2-3】リーディングセッションウィザード＆スプレッド
         // ==========================================
         let sessionState = {
-            themeCategory: 'self_discovery', // self_discovery, practical, future, custom
-            userQuery: 'What essential awareness does my soul need right now?',
             selfCardNo: null,
             spreadType: 'one', // one, four, nine
-            cardsInPlay: [],   // スロットごとの { role, label, desc, card, isPositive } のリスト
+            cardsInPlay: [],   // スロットごとの { role, card, isPositive } のリスト
             revealedSlots: {}, // めくられたスロットの真偽値
-            scrollCount: 0,    // スクロール回数のカウント
-            generatedSynthesis: '', // 自動生成された統合解説
-            reflectionNotes: '',    // ユーザー振り返りメモ
-            aiComment: '',          // アカシックAIメンターによる深層コメント
-            aiChatHistory: [],      // フォローアップ対話履歴
-            sessionTimestamp: null  // セッション日時
-        };
-
-        // 問い（テーマ）プリセット定義
-        const THEME_PRESETS = {
-            self_discovery: {
-                name: "🧘 Self-Exploration",
-                defaultQuery: "What essential awareness does my soul need right now?",
-                queries: [
-                    "What essential awareness does my soul need right now?",
-                    "What message is my Higher Self seeking to convey at this time?",
-                    "What spiritual evolutionary phase am I currently navigating?",
-                    "What latent strength or soul gift is ready to awaken?"
-                ]
-            },
-            practical: {
-                name: "💼 Life & Reality",
-                defaultQuery: "What is the highest stance to navigate my current challenge?",
-                queries: [
-                    "What is the highest stance to navigate my current challenge?",
-                    "What should I focus on in my career and creative expression?",
-                    "What insight will bring deeper harmony and love to my relationships?",
-                    "What discernment is most vital for the decision before me?"
-                ]
-            },
-            future: {
-                name: "🌌 Future Potentials",
-                defaultQuery: "What new possibilities and horizons are unfolding for me?",
-                queries: [
-                    "What new possibilities and horizons are unfolding for me?",
-                    "What attachment or limiting contract am I ready to release?",
-                    "What direction is my soul's evolutionary momentum taking?",
-                    "What inner gateway should I open to embrace the future?"
-                ]
-            },
-            custom: {
-                name: "✍️ Free Inquiry",
-                defaultQuery: "",
-                queries: [
-                    "Enter your specific contemplation or inquiry"
-                ]
-            }
+            scrollCount: 0     // スクロール回数のカウント
         };
 
         // スロット役割定義
         const SLOT_ROLES = {
             one: [
-                { id: 'self', label: 'Self Card (Neutral Anchor)', desc: 'Your current essence and neutral conscious foundation' },
-                { id: 'theme', label: "Today's Theme", desc: 'Core focus, soul awareness, and spiritual alignment for today' }
+                { id: 'self', label: 'Self Card (Neutral)', desc: 'Your current state / The neutral center of consciousness' },
+                { id: 'theme', label: "Today's Theme", desc: 'The theme you should focus on today, spiritual mission' }
             ],
             four: [
-                { id: 'self', label: 'Self Card (Neutral Anchor)', desc: 'Your current state serving as the reference point for all cards' },
-                { id: 'block', label: 'Block / Obstacle', desc: 'What unconscious resistance or pattern is blocking flow? (Transverse)' },
-                { id: 'past', label: 'Past Attitude', desc: 'What past posture or belief brought about this circumstance?' },
-                { id: 'present', label: 'Immediate Influence', desc: 'What wisdom and readiness is opening to you right now?' },
-                { id: 'future', label: 'Most Probable Outcome', desc: 'The natural manifestation flowing from this present consciousness' }
+                { id: 'self', label: 'Self Card (Neutral)', desc: 'Your current state / The reference point from other cards' },
+                { id: 'block', label: 'Block / Obstacle', desc: 'What is blocking me?(Horizontal)' },
+                { id: 'past', label: 'Past Attitude', desc: 'How has this issue influenced my life so far?' },
+                { id: 'present', label: 'Immediate Influence', desc: 'What preparations are ready for me right now regarding this issue?' },
+                { id: 'future', label: 'Most Probable Outcome', desc: 'Highly probable developments brought about from the intention of this moment' }
             ],
             nine: [
-                { id: 'self', label: 'Self Card (Neutral Anchor)', desc: 'Your current essence and central axis of consciousness' },
-                { id: 'block', label: 'Block / Obstacle', desc: 'What pattern is blocking flow? (Transverse)' },
-                { id: 'past', label: 'Past Attitude', desc: 'What past pattern shaped this situation?' },
-                { id: 'present', label: 'Immediate Influence', desc: 'What influence and preparation is offered right now?' },
-                { id: 'future', label: 'Most Probable Outcome', desc: 'The most probable fruition if current trajectory continues' },
-                { id: 'level5', label: 'Deep Inner Conflict', desc: 'The underlying apprehension or worry at the root' },
-                { id: 'level6', label: 'Self-Image', desc: 'How you consciously and unconsciously perceive yourself' },
-                { id: 'level7', label: 'Outer Friction', desc: 'Environmental or relational dynamics mirroring inner state' },
-                { id: 'level8', label: 'Hopes & Fears', desc: 'What you secretly yearn for and what you hesitate to confront' },
-                { id: 'level9', label: 'Ultimate Synthesis', desc: 'The soul liberation and multidimensional breakthrough' }
+                { id: 'self', label: 'Self Card (Neutral)', desc: 'Your current state / The central axis of consciousness' },
+                { id: 'block', label: 'Block / Obstacle', desc: 'What is blocking me?(Horizontal)' },
+                { id: 'past', label: 'Past Attitude', desc: 'How has this issue influenced my life so far?' },
+                { id: 'present', label: 'Immediate Influence', desc: 'What influence is being brought to me right now regarding this issue?' },
+                { id: 'future', label: 'Most Probable Outcome', desc: 'Most Probable Outcome if proceeding as is' },
+                { id: 'level5', label: 'Deep Inner Conflict', desc: 'Your own immediate worries and concerns at the root of the issue' },
+                { id: 'level6', label: 'Self Image', desc: 'How do you perceive yourself?' },
+                { id: 'level7', label: 'Outer Conflict', desc: 'What negative influences are you receiving from the outside or the environment?' },
+                { id: 'level8', label: 'Hopes & Fears', desc: 'What are your hopes and fears regarding the unfolding situation?' },
+                { id: 'level9', label: 'Final Outcome', desc: 'The final conclusion and release reached after all realizations' }
             ]
         };
 
-        // ==========================================
-        // 【Step 1】問い（意図・テーマ）の設定
-        // ==========================================
-        function initIntentStep() {
-            const input = document.getElementById('intent-query-input');
-            if (input && (!input.value || input.value.trim() === "")) {
-                input.value = sessionState.userQuery || THEME_PRESETS.self_discovery.defaultQuery;
-            }
-            renderPresetChips();
-        }
-
-        function selectThemeCategory(catKey) {
-            sessionState.themeCategory = catKey;
-            document.querySelectorAll('.theme-opt-box').forEach(el => el.classList.remove('selected'));
-            const target = document.getElementById(`theme-cat-${catKey === 'self_discovery' ? 'self' : catKey}`);
-            if (target) target.classList.add('selected');
-            
-            const preset = THEME_PRESETS[catKey];
-            if (preset) {
-                const input = document.getElementById('intent-query-input');
-                if (catKey !== 'custom' && preset.defaultQuery) {
-                    input.value = preset.defaultQuery;
-                    sessionState.userQuery = preset.defaultQuery;
-                }
-                renderPresetChips();
-            }
-        }
-
-        function renderPresetChips() {
-            const container = document.getElementById('preset-chips-container');
-            if (!container) return;
-            container.innerHTML = "";
-            const preset = THEME_PRESETS[sessionState.themeCategory] || THEME_PRESETS.self_discovery;
-            preset.queries.forEach(q => {
-                if (sessionState.themeCategory === 'custom' && !q) return;
-                const btn = document.createElement('button');
-                btn.type = 'button';
-                btn.className = 'preset-chip-btn';
-                btn.textContent = q;
-                btn.onclick = () => {
-                    const input = document.getElementById('intent-query-input');
-                    if (input) {
-                        input.value = q;
-                        sessionState.userQuery = q;
-                    }
-                };
-                container.appendChild(btn);
-            });
-        }
-
-        function nextToSelfSelect() {
-            const input = document.getElementById('intent-query-input');
-            const q = input ? input.value.trim() : "";
-            sessionState.userQuery = q || (THEME_PRESETS[sessionState.themeCategory] ? THEME_PRESETS[sessionState.themeCategory].defaultQuery : "What essential awareness does my soul need right now?");
-            
-            document.getElementById('step-intent').classList.remove('active');
-            document.getElementById('step-self').classList.add('active');
-            renderSelfPicker();
-        }
-
-        function prevToIntentSelect() {
-            document.getElementById('step-self').classList.remove('active');
-            document.getElementById('step-intent').classList.add('active');
-        }
-
-        function prevToSpreadSelect() {
-            document.getElementById('step-shuffle').classList.remove('active');
-            document.getElementById('step-spread').classList.add('active');
-        }
-
-        // ==========================================
-        // 【Step 2】セルフカード選択肢の描画
-        // ==========================================
+        // セルフカード選択肢の描画
         function renderSelfPicker() {
             const grid = document.getElementById('self-picker-grid');
-            if (!grid) return;
             grid.innerHTML = "";
             const selectableCards = CARDS_DATA.filter(c => c.no !== 0);
             selectableCards.forEach(card => {
@@ -3044,8 +2265,8 @@
                 };
 
                 item.innerHTML = `
-                    <img src="${getDirectImageUrl(card.url_positive)}" alt="${card.theme_ja}" loading="lazy">
-                    <div>${card.no}. ${card.theme_ja}</div>
+                    <img src="${getDirectImageUrl(card.url_positive)}" alt="${card.theme_en}" loading="lazy">
+                    <div>${card.no}. ${card.theme_en}</div>
                 `;
                 grid.appendChild(item);
             });
@@ -3066,12 +2287,10 @@
             }
         }
 
-        // ==========================================
-        // 【Step 3】スプレッド選択
-        // ==========================================
+        // ウィザード移動
         function nextToSpreadSelect() {
             if (!sessionState.selfCardNo) {
-                alert("Please select 1 Self Card (or click Draw Randomly)");
+                alert("Please select 1 Self card (or press the Draw Randomly button)");
                 return;
             }
             document.getElementById('step-self').classList.remove('active');
@@ -3086,19 +2305,17 @@
         function selectSpreadType(type) {
             sessionState.spreadType = type;
             document.querySelectorAll('.spread-opt-box').forEach(el => el.classList.remove('selected'));
-            const target = document.getElementById(`opt-${type}`);
-            if (target) {
-                target.classList.add('selected');
-            }
+            document.getElementById(`opt-${type}`).classList.add('active');
+            document.getElementById(`opt-${type}`).classList.add('selected');
         }
 
         function nextToShuffle() {
             document.getElementById('step-spread').classList.remove('active');
             document.getElementById('step-shuffle').classList.add('active');
             
-            // ボタンリセット
+            // ボタンReset
             document.getElementById('shuffle-act-btn').style.display = 'inline-block';
-            document.getElementById('shuffle-act-btn').textContent = "Shuffle Deck";
+            document.getElementById('shuffle-act-btn').textContent = "Shuffle Cards";
             document.getElementById('draw-act-btn').style.display = 'none';
 
             // スプレッドの種類に応じた枚数のカードをシャッフル用に動的生成
@@ -3128,7 +2345,7 @@
             
             const btn = document.getElementById('shuffle-act-btn');
             btn.disabled = true;
-            btn.textContent = "Shuffling Deck...";
+            btn.textContent = "Shuffling...";
 
             // 動的生成された各シャッフルカードに異なる動きと時間差(ディレイ)を与える
             const cards = zone.querySelectorAll('.shuffle-card-shadow');
@@ -3168,48 +2385,14 @@
 
         // カードを場に展開する
         function runDeal() {
-            sessionState.sessionTimestamp = new Date().toISOString();
             document.getElementById('step-shuffle').classList.remove('active');
             document.getElementById('reading-board-container').style.display = 'block';
 
             // ボードタイトルの変更
             const titleEl = document.getElementById('board-title-display');
-            if (sessionState.spreadType === 'one') titleEl.textContent = "1-Card Insight (Awareness)";
-            else if (sessionState.spreadType === 'four') titleEl.textContent = "4-Card Spread (Transformation & Insight)";
-            else if (sessionState.spreadType === 'nine') titleEl.textContent = "9-Card Akashic Gate (Multidimensional Awakening)";
-
-            // 問い・テーマのバナー表示
-            const bannerCategory = document.getElementById('intent-banner-category');
-            const bannerQuery = document.getElementById('intent-banner-query');
-            if (bannerCategory) {
-                const catConf = THEME_PRESETS[sessionState.themeCategory];
-                bannerCategory.textContent = `${catConf ? catConf.icon : '✨'} ${catConf ? catConf.name : 'Inquiry Theme'}`;
-            }
-            if (bannerQuery) {
-                bannerQuery.textContent = sessionState.userQuery || "(Free Inquiry & Conscious Focus)";
-            }
-
-            // ノート欄のリセット
-            const notesEl = document.getElementById('reflection-notes-input') || document.getElementById('reading-user-notes');
-            if (notesEl) notesEl.value = "";
-            sessionState.reflectionNotes = "";
-
-            // AIメンター欄のリセット
-            sessionState.aiComment = "";
-            sessionState.aiChatHistory = [];
-            const aiResp = document.getElementById('ai-mentor-response');
-            if (aiResp) aiResp.style.display = 'none';
-            const aiLoad = document.getElementById('ai-mentor-loading');
-            if (aiLoad) aiLoad.style.display = 'none';
-            const aiPlace = document.getElementById('ai-mentor-status-placeholder');
-            if (aiPlace) {
-                aiPlace.style.display = 'block';
-                updateAIMentorStatusUI();
-            }
-            const aiContent = document.getElementById('ai-mentor-content');
-            if (aiContent) aiContent.innerHTML = '';
-            const followupInput = document.getElementById('ai-followup-input');
-            if (followupInput) followupInput.value = '';
+            if (sessionState.spreadType === 'one') titleEl.textContent = "1-Card Draw for Self (Theme)";
+            else if (sessionState.spreadType === 'four') titleEl.textContent = "4-Card Spread (Deep Insight into the Issue)";
+            else if (sessionState.spreadType === 'nine') titleEl.textContent = "9-Card Spread (Multi-Dimensional Level)";
 
             // 1. スプレッド用のカードを決定（セルフカードおよび裏面画像データを除外してシャッフル）
             const pool = CARDS_DATA.filter(c => c.no !== sessionState.selfCardNo && c.no !== 0);
@@ -3222,7 +2405,7 @@
             let poolIdx = 0;
             slots.forEach(slot => {
                 if (slot.id === 'self') {
-                    // セルフカードは正位置固定（中立）
+                    // セルフカードはPositive固定（中立）
                     sessionState.cardsInPlay.push({
                         role: slot.id,
                         label: slot.label,
@@ -3251,9 +2434,6 @@
             
             // 3. 最初は自動的にセルフカードを選択状態にする（自動スクロールはさせない）
             selectSlotForReading('self', false);
-
-            // 4. 統合ガイダンスの初期表示更新
-            updateSynthesisDisplay();
         }
 
         // リーディングボードのHTML構築
@@ -3262,6 +2442,7 @@
             board.innerHTML = "";
 
             // レイアウトクラスの設定
+            const boardContainer = document.getElementById('reading-board-container');
             const boardLayout = document.getElementById('board-layout-el');
             boardLayout.className = `board-layout layout-${sessionState.spreadType}`;
 
@@ -3291,7 +2472,7 @@
                     <div class="card-3d-wrapper ${isRevealed ? 'flipped' : ''}" id="wrap-${item.role}">
                         <div class="${backClass}" ${backStyle}></div>
                         <div class="card-front-3d ${!item.isPositive ? 'reversed-img' : ''}">
-                            <img src="${imgUrl}" alt="${item.card.theme_ja}">
+                            <img src="${imgUrl}" alt="${item.card.theme_en}">
                         </div>
                     </div>
                     <div class="slot-label">${item.label}</div>
@@ -3309,21 +2490,6 @@
                 wrap.classList.add('flipped');
                 playMetronomeTick(); // めくる瞬間にカチッと音
             }
-            updateSynthesisDisplay();
-        }
-
-        // すべてのカードを一度にオープン
-        function revealAllCards() {
-            sessionState.cardsInPlay.forEach(item => {
-                if (!sessionState.revealedSlots[item.role]) {
-                    sessionState.revealedSlots[item.role] = true;
-                    const wrap = document.getElementById(`wrap-${item.role}`);
-                    if (wrap) wrap.classList.add('flipped');
-                }
-            });
-            playMetronomeTick();
-            updateSynthesisDisplay();
-            showToast("All cards have been revealed");
         }
 
         // スロットが選択された時の詳細表示
@@ -3344,7 +2510,7 @@
 
             if (!isRevealed) {
                 // まだめくられていない場合、パネルは伏せられた状態
-                document.getElementById('panel-card-title').textContent = "(Cards are face down)";
+                document.getElementById('panel-card-title').textContent = "(Card is faced down)";
                 if (CARD_BACK_IMAGE_URL) {
                     document.getElementById('panel-card-img-box').innerHTML = `<img src="${CARD_BACK_IMAGE_URL}" style="width:100%; height:100%; object-fit:cover;">`;
                 } else {
@@ -3352,35 +2518,35 @@
                 }
                 document.getElementById('panel-pos-badge').style.display = 'none';
                 document.getElementById('panel-levels').innerHTML = "";
-                document.getElementById('panel-card-meaning').textContent = "Click the cards above to reveal them.";
-                document.getElementById('panel-meaning-title').textContent = "Oracle Message";
-                document.getElementById('panel-card-desc').innerHTML = "Reveal cards to view Gary Bonnell's detailed oracle interpretations.";
+                document.getElementById('panel-card-meaning').textContent = "Please click the card above to open it.";
+                document.getElementById('panel-meaning-title').textContent = "Message";
+                document.getElementById('panel-card-desc').innerHTML = "By opening the card, detailed oracle and description by Gary Bonnell will be displayed.";
                 panel.style.display = 'block';
                 return;
             }
 
             // オープンされている場合
             const card = item.card;
-            document.getElementById('panel-card-title').textContent = `${card.no}. ${card.theme_ja} (${card.theme_en})`;
+            document.getElementById('panel-card-title').textContent = `${card.no}. ${card.theme_en} (${card.theme_en})`;
             
             const imgBox = document.getElementById('panel-card-img-box');
             imgBox.className = `reading-card-img-box ${!item.isPositive ? 'reversed-img' : ''}`;
-            imgBox.innerHTML = `<img id="panel-card-img" src="${getDirectImageUrl(item.isPositive ? card.url_positive : card.url_reverse, item.isPositive)}" alt="${card.theme_ja}">`;
+            imgBox.innerHTML = `<img id="panel-card-img" src="${getDirectImageUrl(item.isPositive ? card.url_positive : card.url_reverse, item.isPositive)}" alt="${card.theme_en}">`;
 
             const posBadge = document.getElementById('panel-pos-badge');
             posBadge.style.display = 'inline-block';
             
             if (item.isPositive) {
-                posBadge.textContent = "正位置";
+                posBadge.textContent = "Positive";
                 posBadge.className = "position-badge badge-positive";
                 document.getElementById('panel-card-meaning').textContent = card.positive;
-                document.getElementById('panel-meaning-title').textContent = "正位置のメッセージ";
+                document.getElementById('panel-meaning-title').textContent = "Positive Message";
                 document.getElementById('panel-meaning-box').className = "card-meaning-box";
             } else {
-                posBadge.textContent = "逆位置";
+                posBadge.textContent = "Reversed";
                 posBadge.className = "position-badge badge-reversed";
                 document.getElementById('panel-card-meaning').textContent = card.reverse;
-                document.getElementById('panel-meaning-title').textContent = "逆位置のメッセージ";
+                document.getElementById('panel-meaning-title').textContent = "Reversed Message";
                 document.getElementById('panel-meaning-box').className = "card-meaning-box reversed-meaning";
             }
 
@@ -3391,857 +2557,30 @@
             document.getElementById('panel-levels').innerHTML = lvHtml;
 
             // 解説（「。」で改行フォーマットして innerHTML に設定）
-            document.getElementById('panel-card-desc').innerHTML = formatDescription(card.description) || "No interpretation available.";
+            document.getElementById('panel-card-desc').innerHTML = formatDescription(card.description) || "No description.";
 
             panel.style.display = 'block';
             
             if (shouldScroll) {
                 sessionState.scrollCount++;
+                // 1回目のスクロール（最初のカード選択）は二段階ギアチェンジ（725ms）
+                // 2回目以降のカード選択は、最初からx4倍の超高速スクロール（350ms）
                 const isFirstScroll = sessionState.scrollCount <= 1;
                 const duration = isFirstScroll ? 725 : 350;
                 slowScrollTo(panel, duration, !isFirstScroll);
             }
         }
 
-        // ==========================================
-        // 【v4新機能】統合リーディング解析エンジン (Synthesis Engine)
-        // ==========================================
-        const ReadingSynthesisEngine = {
-            generate(state) {
-                if (!state || !state.cardsInPlay || state.cardsInPlay.length === 0) return "";
-                
-                const selfCard = CARDS_DATA.find(c => c.no === state.selfCardNo);
-                const spreadCards = state.cardsInPlay.filter(c => c.role !== 'self');
-                const revealedSpreadCards = spreadCards.filter(c => state.revealedSlots[c.role]);
-                const queryText = state.userQuery ? `"${state.userQuery}"` : '"Soul inquiry & spiritual evolution"';
-
-                let html = "";
-
-                // 1. Inquiry and Soul Foundation
-                html += `<div style="margin-bottom: 14px;">`;
-                html += `<div style="font-weight: bold; color: var(--gold); margin-bottom: 4px;">◆ Soul Foundation & Neutral Anchor (Self Card)</div>`;
-                html += `<div style="color: var(--text-main); font-size: 0.85rem; line-height: 1.6;">`;
-                html += `In resonance with your inquiry ${queryText}, your foundation card is <strong>No.${selfCard ? selfCard.no : '?'}. ${selfCard ? selfCard.theme_en : ''}</strong>.<br>`;
-                if (selfCard && selfCard.spiritual_meaning) {
-                    html += `<span style="color: var(--text-muted); font-size: 0.8rem;">Spiritual Meaning: ${selfCard.spiritual_meaning}</span>`;
-                }
-                html += `</div></div>`;
-
-                // If no cards are revealed yet
-                if (revealedSpreadCards.length === 0) {
-                    html += `<div style="background: rgba(212,175,55,0.06); border: 1px dashed rgba(212,175,55,0.35); border-radius: 8px; padding: 14px; text-align: center; margin-top: 10px;">`;
-                    html += `<div style="font-size: 1.2rem; margin-bottom: 4px;">👆</div>`;
-                    html += `<div style="font-weight: bold; color: var(--gold); margin-bottom: 4px;">Click the cards above to reveal them</div>`;
-                    html += `<div style="font-size: 0.8rem; color: var(--text-muted); line-height: 1.5;">`;
-                    html += `As you reveal each card, resonance with your Self Card and integrated guidance will emerge in real time.`;
-                    html += `</div></div>`;
-                    return html;
-                }
-
-                // 2. Revealed Cards Interconnection
-                html += `<div style="margin-bottom: 14px;">`;
-                html += `<div style="font-weight: bold; color: var(--gold); margin-bottom: 6px;">◆ Multidimensional Resonance & Transmutation Signs</div>`;
-                html += `<div style="display: flex; flex-direction: column; gap: 8px;">`;
-
-                revealedSpreadCards.forEach(item => {
-                    const c = item.card;
-                    const posStr = item.isPositive ? "Upright" : "Reversed";
-                    const posColor = item.isPositive ? "#4ade80" : "#fbbf24";
-                    const meaningText = item.isPositive ? c.positive : c.reverse;
-
-                    html += `<div style="background: rgba(255,255,255,0.02); border-left: 2px solid ${posColor}; padding: 8px 12px; border-radius: 4px;">`;
-                    html += `<div style="font-size: 0.82rem; font-weight: bold; color: #fff;">`;
-                    html += `【${item.label}】 No.${c.no} ${c.theme_en} <span style="color:${posColor}; font-size:0.75rem; margin-left:6px;">[${posStr}]</span>`;
-                    html += `</div>`;
-                    html += `<div style="font-size: 0.78rem; color: var(--text-muted); margin-top: 3px; line-height: 1.5;">${meaningText}</div>`;
-                    
-                    if (!item.isPositive) {
-                        html += `<div style="font-size: 0.72rem; color: #fbbf24; margin-top: 4px; font-style: italic;">💡 Reversal Transmutation: An opportune threshold to witness unconscious resistance and release outdated attachments.</div>`;
-                    }
-                    html += `</div>`;
-                });
-
-                if (revealedSpreadCards.length < spreadCards.length) {
-                    html += `<div style="color: var(--text-muted); font-size: 0.75rem; text-align: center; padding: 6px 0;">`;
-                    html += `(There are still cards to reveal. Open all cards to complete the full synthesis guidance)`;
-                    html += `</div>`;
-                }
-
-                html += `</div></div>`;
-
-                // 3. Synthesis Guidance
-                html += `<div>`;
-                html += `<div style="font-weight: bold; color: var(--gold); margin-bottom: 4px;">◆ Integrated Oracle & Soul Prescription</div>`;
-                html += `<div style="color: var(--text-main); font-size: 0.85rem; line-height: 1.6; background: rgba(212,175,55,0.04); border: 1px dashed rgba(212,175,55,0.3); border-radius: 6px; padding: 12px;">`;
-                
-                const reversedCount = revealedSpreadCards.filter(c => !c.isPositive).length;
-                if (state.spreadType === 'one') {
-                    const themeItem = revealedSpreadCards[0];
-                    if (themeItem) {
-                        if (themeItem.isPositive) {
-                            html += `Today's theme <strong>"${themeItem.card.theme_en}"</strong> shines in harmonious alignment with your core Self (No.${selfCard ? selfCard.no : '?'}. ${selfCard ? selfCard.theme_en : 'Self'}).<br>`;
-                            html += `Trust your intuitive knowing without overthinking, and embody this vibrant frequency in your conscious daily actions.`;
-                        } else {
-                            html += `Today's theme <strong>"${themeItem.card.theme_en}"</strong> appears in reversal, gently inviting you to soften unconscious friction and release mental holding patterns.<br>`;
-                            html += `Rest back into the stillness of your Self Card center, allowing natural grace to guide the unfolding changes.`;
-                        }
-                    }
-                } else {
-                    if (reversedCount === 0 && revealedSpreadCards.length > 0) {
-                        html += `All archetypal energies are flowing in direct, unobstructed circulation. Anchor your discernment in the quiet certainty of your Self Card and take decisive, heart-aligned action.`;
-                    } else if (reversedCount > 0) {
-                        html += `You are being initiated into inner recalibration and the shedding of outgrown illusions. Rather than resisting outward circumstances, embrace the transformative signals of these cards to step into higher clarity.`;
-                    } else {
-                        html += `Open the sacred cards and surrender your analytical mind to intuitive revelation.`;
-                    }
-                }
-                html += `</div></div>`;
-
-                return html;
-            }
-        };
-
-        // 統合ガイダンスの表示更新
-        function updateSynthesisDisplay() {
-            const cardEl = document.getElementById('reading-synthesis-card-el');
-            const contentEl = document.getElementById('synthesis-text-el') || document.getElementById('synthesis-content-el');
-            if (!cardEl || !contentEl) return;
-
-            // スプレッドバッジの更新
-            const badgeEl = document.getElementById('synthesis-spread-badge');
-            if (badgeEl) {
-                if (sessionState.spreadType === 'one') badgeEl.textContent = "1-Card Insight (Awareness)";
-                else if (sessionState.spreadType === 'four') badgeEl.textContent = "4-Card Spread (Transformation)";
-                else if (sessionState.spreadType === 'nine') badgeEl.textContent = "9-Card Akashic Gate (Multidimensional)";
-            }
-
-            cardEl.style.display = 'block';
-            const synthesisHtml = ReadingSynthesisEngine.generate(sessionState);
-            contentEl.innerHTML = synthesisHtml;
-            sessionState.generatedSynthesis = synthesisHtml;
-        }
-
-        // ==========================================
-        // 【v4新機能】リーディング記録＆外部連携エンジン (ReadingRecordIO)
-        // ==========================================
-        const ReadingRecordIO = {
-            createSessionData() {
-                const selfCard = CARDS_DATA.find(c => c.no === sessionState.selfCardNo);
-                const notesInput = document.getElementById('reflection-notes-input') || document.getElementById('reading-user-notes');
-                const notes = (notesInput ? notesInput.value : "").trim();
-                
-                return {
-                    id: "akashic_rec_" + Date.now(),
-                    timestamp: sessionState.sessionTimestamp || new Date().toISOString(),
-                    formattedDate: new Date().toLocaleString('ja-JP', { dateStyle: 'medium', timeStyle: 'short' }),
-                    themeCategory: sessionState.themeCategory || 'general',
-                    themeCategoryName: THEME_PRESETS[sessionState.themeCategory]?.name || 'Inquiry Theme',
-                    userQuery: sessionState.userQuery || "(Inquiry unset)",
-                    spreadType: sessionState.spreadType,
-                    spreadName: (sessionState.spreadType === 'one' ? '1-Card Insight' : sessionState.spreadType === 'four' ? '4-Card Spread' : '9-Card Spread'),
-                    selfCard: selfCard ? {
-                        no: selfCard.no,
-                        theme_ja: selfCard.theme_ja,
-                        theme_en: selfCard.theme_en,
-                        spiritual_meaning: selfCard.spiritual_meaning || ""
-                    } : null,
-                    slots: sessionState.cardsInPlay.map(item => ({
-                        role: item.role,
-                        label: item.label,
-                        desc: item.desc,
-                        revealed: !!sessionState.revealedSlots[item.role],
-                        cardNo: item.card.no,
-                        theme_ja: item.card.theme_ja,
-                        theme_en: item.card.theme_en,
-                        isPositive: item.isPositive,
-                        positionLabel: item.isPositive ? "Upright" : "Reversed",
-                        meaning: item.isPositive ? item.card.positive : item.card.reverse,
-                        spiritual_level: item.card.spiritual_level || "",
-                        daily_level: item.card.daily_level || ""
-                    })),
-                    userNotes: notes,
-                    aiComment: sessionState.aiComment || ""
-                };
-            },
-
-            formatAsAIPrompt(data) {
-                let p = `# Akashic Record Cards Reading Oracle Prompt\n\n`;
-                p += `You are an enlightened mentor and multidimensional consciousness guide steeped in Gary Bonnell's Akashic Records system.\n`;
-                p += `Based on the following reading session, convey the seeker's soul growth, illuminate unconscious blocks, and provide actionable daily prescriptions with compassion and profound clarity.\n\n`;
-                
-                p += `## 1. Soul Intent & Inquiry Theme\n`;
-                p += `- **Category**: ${data.themeCategoryName}\n`;
-                p += `- **Inquiry**: "${data.userQuery}"\n`;
-                p += `- **Session Timestamp**: ${data.formattedDate}\n`;
-                p += `- **Spread Architecture**: ${data.spreadName}\n\n`;
-
-                if (data.selfCard) {
-                    p += `## 2. Self Card (Soul Neutral Center)\n`;
-                    p += `- **No.${data.selfCard.no} ${data.selfCard.theme_en}**\n`;
-                    if (data.selfCard.spiritual_meaning) p += `  - Spiritual Meaning: ${data.selfCard.spiritual_meaning}\n`;
-                    p += `\n`;
-                }
-
-                p += `## 3. Drawn Cards & Sacred Messages\n`;
-                data.slots.forEach(slot => {
-                    p += `### [${slot.label}]: No.${slot.cardNo} ${slot.theme_en} [${slot.positionLabel}]\n`;
-                    p += `- **Position Role**: ${slot.desc}\n`;
-                    p += `- **Oracle Message**: ${slot.meaning}\n`;
-                    if (slot.spiritual_level) p += `- **Spiritual Level**: ${slot.spiritual_level}\n`;
-                    if (slot.daily_level) p += `- **Daily Level**: ${slot.daily_level}\n`;
-                    p += `\n`;
-                });
-
-                if (data.userNotes) {
-                    p += `## 4. Seeker's Personal Reflection & Journal Notes\n`;
-                    p += `${data.userNotes}\n\n`;
-                }
-
-                p += `---\n`;
-                p += `### Guidance Requested from Akashic AI Mentor:\n`;
-                p += `1. **Soul Intent Resonance**: Illuminate the connection between the seeker's inquiry and their Self Card foundation.\n`;
-                p += `2. **Transmutation of Reversals**: If reversed cards appear, explain how to witness and integrate the subconscious resistance into awareness.\n`;
-                p += `3. **Daily Actionable Prescriptions**: Offer 3 clear, conscious integration exercises for everyday life and meditation.\n`;
-
-                return p;
-            },
-
-            formatAsMarkdown(data) {
-                let md = `# Akashic Records Reading Journey (${data.formattedDate})\n\n`;
-                md += `- **Theme Category**: ${data.themeCategoryName}\n`;
-                md += `- **Soul Inquiry**: "${data.userQuery}"\n`;
-                md += `- **Spread**: ${data.spreadName}\n\n`;
-
-                if (data.selfCard) {
-                    md += `## Self Card: No.${data.selfCard.no} ${data.selfCard.theme_en}\n`;
-                    if (data.selfCard.spiritual_meaning) md += `> ${data.selfCard.spiritual_meaning}\n\n`;
-                }
-
-                md += `## Layout Architecture\n\n`;
-                md += `| Position | Card | Orientation | Oracle Message |\n`;
-                md += `| :--- | :--- | :--- | :--- |\n`;
-                data.slots.forEach(slot => {
-                    md += `| ${slot.label} | No.${slot.cardNo} ${slot.theme_en} | ${slot.positionLabel} | ${slot.meaning.replace(/[\r\n]+/g, ' ')} |\n`;
-                });
-                md += `\n`;
-
-                if (data.aiComment) {
-                    md += `## 🔮 Akashic AI Mentor Oracle Guidance\n\n`;
-                    md += `${data.aiComment}\n\n`;
-                }
-
-                if (data.userNotes) {
-                    md += `## Personal Reflections & Journal\n\n`;
-                    md += `${data.userNotes}\n\n`;
-                }
-
-                md += `---\n*Generated by Akashic Record Cards v.04 (EN)*\n`;
-                return md;
-            },
-
-            getHistory() {
-                try {
-                    const raw = safeGetStorage('localStorage', "akashic_reading_history");
-                    return raw ? JSON.parse(raw) : [];
-                } catch (e) {
-                    console.error("Failed to parse reading history", e);
-                    return [];
-                }
-            },
-
-            saveToHistory(data) {
-                const history = this.getHistory();
-                history.unshift(data);
-                // 最大100件まで保持
-                if (history.length > 100) history.pop();
-                safeSetStorage('localStorage', "akashic_reading_history", JSON.stringify(history));
-                return true;
-            },
-
-            deleteHistoryItem(id) {
-                let history = this.getHistory();
-                history = history.filter(item => item.id !== id);
-                safeSetStorage('localStorage', "akashic_reading_history", JSON.stringify(history));
-            },
-
-            clearAll() {
-                safeSetStorage('localStorage', "akashic_reading_history", JSON.stringify([]));
-            },
-
-            // --- ユーザーUIトリガー ---
-            copyPrompt() {
-                const data = this.createSessionData();
-                const promptText = this.formatAsAIPrompt(data);
-                copyToClipboard(promptText, "AI Prompt copied to clipboard!");
-            },
-
-            copyMarkdown() {
-                const data = this.createSessionData();
-                const mdText = this.formatAsMarkdown(data);
-                copyToClipboard(mdText, "Markdown copied to clipboard!");
-            },
-
-            saveCurrentToHistory() {
-                const data = this.createSessionData();
-                this.saveToHistory(data);
-                showToast("Reading saved to history!", "💾");
-            },
-
-            exportCurrentJSON() {
-                const data = this.createSessionData();
-                const d = new Date();
-                const filename = `akashic_reading_${d.getFullYear()}${String(d.getMonth()+1).padStart(2,'0')}${String(d.getDate()).padStart(2,'0')}_${String(d.getHours()).padStart(2,'0')}${String(d.getMinutes()).padStart(2,'0')}.json`;
-                downloadJSONFile(data, filename);
-            },
-
-            exportAllHistoryJSON() {
-                const history = this.getHistory();
-                if (history.length === 0) {
-                    alert("No reading history saved yet.");
-                    return;
-                }
-                const d = new Date();
-                const filename = `akashic_history_backup_${d.getFullYear()}${String(d.getMonth()+1).padStart(2,'0')}${String(d.getDate()).padStart(2,'0')}.json`;
-                downloadJSONFile(history, filename);
-            }
-        };
-
-        // ==========================================
-        // 【v4新機能】クリップボード・ファイル・トーストユーティリティ
-        // ==========================================
-        function showToast(message) {
-            const el = document.getElementById('toast-notice');
-            if (!el) return;
-            el.textContent = message;
-            el.classList.add('show');
-            clearTimeout(window.__toastTimeout);
-            window.__toastTimeout = setTimeout(() => {
-                el.classList.remove('show');
-            }, 2500);
-        }
-
-        async function copyToClipboard(text, successMsg = "Copied to clipboard") {
-            try {
-                if (navigator.clipboard && window.isSecureContext) {
-                    await navigator.clipboard.writeText(text);
-                    showToast(successMsg);
-                } else {
-                    fallbackCopyText(text, successMsg);
-                }
-            } catch (err) {
-                fallbackCopyText(text, successMsg);
-            }
-        }
-
-        function fallbackCopyText(text, successMsg) {
-            const textArea = document.createElement("textarea");
-            textArea.value = text;
-            textArea.style.position = "fixed";
-            textArea.style.left = "-999999px";
-            textArea.style.top = "-999999px";
-            document.body.appendChild(textArea);
-            textArea.focus();
-            textArea.select();
-            try {
-                document.execCommand('copy');
-                showToast(successMsg);
-            } catch (e) {
-                console.error("Fallback copy failed", e);
-                prompt("Please copy below:", text);
-            }
-            textArea.remove();
-        }
-
-        function downloadJSONFile(data, filename) {
-            const str = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(data, null, 2));
-            const downloadAnchor = document.createElement('a');
-            downloadAnchor.setAttribute("href", str);
-            downloadAnchor.setAttribute("download", filename);
-            document.body.appendChild(downloadAnchor);
-            downloadAnchor.click();
-            downloadAnchor.remove();
-            showToast(`Exported file [${filename}]`);
-        }
-
-        // ==========================================
-        // 【v4新機能】リーディング履歴一覧の描画 (History View)
-        // ==========================================
-        function renderHistoryList() {
-            const container = document.getElementById('history-list-container');
-            const countEl = document.getElementById('history-count-badge');
-            if (!container) return;
-
-            const history = ReadingRecordIO.getHistory();
-            if (countEl) countEl.textContent = `${history.length} entries`;
-
-            if (history.length === 0) {
-                container.innerHTML = `
-                    <div class="glass-panel" style="text-align: center; padding: 40px 20px; color: var(--text-muted);">
-                        <div style="font-size: 2rem; margin-bottom: 10px;">📜</div>
-                        <div>No reading history recorded yet.</div>
-                        <div style="font-size: 0.75rem; margin-top: 6px;">Click "Save to History" on the reading board to record sessions here.</div>
-                    </div>
-                `;
-                return;
-            }
-
-            container.innerHTML = "";
-            history.forEach(item => {
-                const card = document.createElement('div');
-                card.className = 'history-item-card glass-panel';
-
-                let chipsHtml = "";
-                if (item.selfCard) {
-                    chipsHtml += `<span class="history-card-chip" style="border-color: var(--gold); color: var(--gold);">Self: No.${item.selfCard.no} ${item.selfCard.theme_en}</span>`;
-                }
-                if (item.slots) {
-                    item.slots.forEach(s => {
-                        const posColor = s.isPositive ? "#4ade80" : "#fbbf24";
-                        chipsHtml += `<span class="history-card-chip" style="border-color: ${posColor};">${s.label}: No.${s.cardNo} ${s.theme_en} (${s.positionLabel})</span>`;
-                    });
-                }
-
-                card.innerHTML = `
-                    <div class="history-item-header">
-                        <div>
-                            <span class="history-item-tag">${item.themeCategoryName || 'Inquiry'}</span>
-                            <span class="history-item-tag" style="background: rgba(255,255,255,0.06); color: var(--text-muted);">${item.spreadName || 'Spread'}</span>
-                            ${item.aiComment ? `<span class="history-item-tag" style="background: rgba(138,43,226,0.25); color: #d8b4fe; border: 1px solid rgba(138,43,226,0.5);">🔮 AI Oracle</span>` : ''}
-                        </div>
-                        <div class="history-item-date">${item.formattedDate || ''}</div>
-                    </div>
-                    <div class="history-item-query">${item.userQuery || '(Inquiry unset)'}</div>
-                    <div class="history-card-chips">${chipsHtml}</div>
-                    ${item.aiComment ? `<div style="font-size: 0.78rem; color: #e9d5ff; margin-top: 8px; background: rgba(138,43,226,0.12); border-left: 2px solid #a855f7; padding: 8px 12px; border-radius: 4px; line-height: 1.5; max-height: 140px; overflow-y: auto;">🔮 <strong>AI Mentor Oracle:</strong><br>${item.aiComment.replace(/[\r\n]+/g, ' ').substring(0, 180)}...</div>` : ''}
-                    ${item.userNotes ? `<div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 8px; font-style: italic; background: rgba(0,0,0,0.2); padding: 6px 10px; border-radius: 4px;">📝 ${item.userNotes}</div>` : ''}
-                    <div class="history-item-actions">
-                        <button class="io-btn" onclick="copyHistoryPrompt('${item.id}')">🤖 AIプロンプト</button>
-                        <button class="io-btn" onclick="copyHistoryMarkdown('${item.id}')">📋 Markdown</button>
-                        <button class="io-btn" onclick="exportHistorySingleJSON('${item.id}')">💾 JSON</button>
-                        <button class="io-btn delete-btn" onclick="deleteHistorySingleItem('${item.id}')">🗑️ Delete</button>
-                    </div>
-                `;
-
-                container.appendChild(card);
-            });
-        }
-
-        function copyHistoryPrompt(id) {
-            const history = ReadingRecordIO.getHistory();
-            const item = history.find(h => h.id === id);
-            if (!item) return;
-            const text = ReadingRecordIO.formatAsAIPrompt(item);
-            copyToClipboard(text, "Copied history AI prompt!");
-        }
-
-        function copyHistoryMarkdown(id) {
-            const history = ReadingRecordIO.getHistory();
-            const item = history.find(h => h.id === id);
-            if (!item) return;
-            const text = ReadingRecordIO.formatAsMarkdown(item);
-            copyToClipboard(text, "Copied history Markdown!");
-        }
-
-        function exportHistorySingleJSON(id) {
-            const history = ReadingRecordIO.getHistory();
-            const item = history.find(h => h.id === id);
-            if (!item) return;
-            downloadJSONFile(item, `${item.id}.json`);
-        }
-
-        function deleteHistorySingleItem(id) {
-            if (!confirm("Delete this reading record?")) return;
-            ReadingRecordIO.deleteHistoryItem(id);
-            renderHistoryList();
-            showToast("Record deleted");
-        }
-
-        function clearAllHistory() {
-            const history = ReadingRecordIO.getHistory();
-            if (history.length === 0) return;
-            if (!confirm(`Are you sure you want to clear all ${history.length} saved reading entries?\n(This action cannot be undone)`)) return;
-            ReadingRecordIO.clearAll();
-            renderHistoryList();
-            showToast("All history cleared");
-        }
-
         function resetReadingSession() {
             sessionState.selfCardNo = null;
             sessionState.cardsInPlay = [];
             sessionState.revealedSlots = {};
-            sessionState.scrollCount = 0; // スクロール回数をリセット
-            sessionState.generatedSynthesis = "";
-            sessionState.reflectionNotes = "";
-
-            // ボードとステップの表示切り替え
+            sessionState.scrollCount = 0; // スクロール回数をReset
+            
             document.getElementById('reading-board-container').style.display = 'none';
-            document.querySelectorAll('#view-reading .reading-step').forEach(step => step.classList.remove('active'));
-            document.getElementById('step-intent').classList.add('active');
-
-            // 入力のリセット
-            const queryInput = document.getElementById('intent-query-input');
-            if (queryInput) queryInput.value = "";
-            sessionState.userQuery = "";
-            const notesEl = document.getElementById('reflection-notes-input') || document.getElementById('reading-user-notes');
-            if (notesEl) notesEl.value = "";
+            document.getElementById('step-self').classList.add('active');
             
-            // AIメンター欄のリセット
-            sessionState.aiComment = "";
-            sessionState.aiChatHistory = [];
-            const aiResp = document.getElementById('ai-mentor-response');
-            if (aiResp) aiResp.style.display = 'none';
-            const aiLoad = document.getElementById('ai-mentor-loading');
-            if (aiLoad) aiLoad.style.display = 'none';
-            const aiPlace = document.getElementById('ai-mentor-status-placeholder');
-            if (aiPlace) {
-                aiPlace.style.display = 'block';
-                updateAIMentorStatusUI();
-            }
-            const aiContent = document.getElementById('ai-mentor-content');
-            if (aiContent) aiContent.innerHTML = '';
-            const followupInput = document.getElementById('ai-followup-input');
-            if (followupInput) followupInput.value = '';
-            
-            initIntentStep();
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-
-        // ==========================================
-        // 【v4新機能】アカシックAIメンター対話エンジン (Gemini API)
-        // ==========================================
-        function toggleApiKeyVisibility() {
-            const input = document.getElementById('gemini-api-key-input');
-            const btn = document.getElementById('btn-toggle-key-visibility');
-            if (!input || !btn) return;
-            if (input.type === 'password') {
-                input.type = 'text';
-                btn.textContent = 'Hide';
-            } else {
-                input.type = 'password';
-                btn.textContent = 'Show';
-            }
-        }
-
-        // AIメンターのステータス表示を動的更新
-        function updateAIMentorStatusUI() {
-            const apiKey = (safeGetStorage('localStorage', 'akashic_gemini_api_key') || '').trim();
-            let model = safeGetStorage('localStorage', 'akashic_gemini_model') || 'gemini-3.8-flash';
-            if (model.includes('1.5') || model.includes('2.5') || model.includes('2.0')) {
-                model = 'gemini-3.8-flash';
-                safeSetStorage('localStorage', 'akashic_gemini_model', model);
-            }
-            
-            const placeholder = document.getElementById('ai-mentor-status-placeholder');
-            if (!placeholder) return;
-
-            if (sessionState.aiComment) {
-                placeholder.style.display = 'none';
-                return;
-            }
-
-            placeholder.style.display = 'block';
-
-            if (apiKey) {
-                const masked = apiKey.length > 8 
-                    ? apiKey.substring(0, 4) + '...' + apiKey.substring(apiKey.length - 4) 
-                    : '****';
-                placeholder.innerHTML = `
-                    <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px;">
-                        <div>
-                            <div style="color: #4ade80; font-weight: bold; font-size: 0.85rem; display: flex; align-items: center; gap: 6px;">
-                                <span>✅</span> Gemini API設定済み <span style="font-family: monospace; font-size: 0.75rem; color: #a3e635;">(${masked})</span>
-                            </div>
-                            <div style="font-size: 0.72rem; color: var(--text-muted); margin-top: 3px;">
-                                モデル: <span style="color: var(--gold); font-weight: 500;">${model}</span> | 「AIコメントを受け取る」を押すと神託メッセージが生成されます
-                            </div>
-                        </div>
-                        <div style="display: flex; gap: 8px; flex-wrap: wrap;">
-                            <button type="button" class="breath-control-btn" style="padding: 6px 14px; font-size: 0.78rem; background: rgba(138,43,226,0.4); border: 1px solid #a855f7; color: #fff;" onclick="requestAIMentorComment()">
-                                ✨ 今すぐAIコメントを受け取る
-                            </button>
-                            <button type="button" class="breath-control-btn" style="padding: 6px 10px; font-size: 0.72rem; background: rgba(255,255,255,0.06); border: 1px solid var(--border-color); color: var(--text-muted);" onclick="openSettingsModal()">
-                                ⚙️ 設定変更
-                            </button>
-                        </div>
-                    </div>
-                `;
-            } else {
-                placeholder.innerHTML = `
-                    <div style="margin-bottom: 8px;">
-                        Receive a personalized soul oracle message from the Akashic AI Mentor based on your drawn cards and intention.
-                    </div>
-                    <div style="display: flex; gap: 8px; flex-wrap: wrap; align-items: center;">
-                        <button type="button" class="breath-control-btn" style="padding: 6px 14px; font-size: 0.78rem; background: rgba(138,43,226,0.3); border: 1px solid #a855f7; color: #fff;" onclick="openSettingsModal()">
-                            ⚙️ Configure Gemini API Key（無料）
-                        </button>
-                        <span style="font-size: 0.72rem; color: var(--text-muted);">(* Enter your free API key from Google AI Studio)</span>
-                        <span style="color: var(--text-muted); font-size: 0.75rem;">または</span>
-                        <button type="button" class="breath-control-btn" style="padding: 5px 10px; font-size: 0.72rem; background: rgba(0,210,255,0.1); border: 1px solid rgba(0,210,255,0.4); color: #00d2ff;" onclick="ReadingRecordIO.copyPrompt()">
-                            📋 プロンプトをコピーして外部AIで使う
-                        </button>
-                    </div>
-                `;
-            }
-        }
-
-        function openSettingsModal() {
-            const modal = document.getElementById('settings-modal');
-            if (modal) {
-                // 最新の保存値を反映
-                const savedApiKey = safeGetStorage('localStorage', "akashic_gemini_api_key") || "";
-                let savedModel = safeGetStorage('localStorage', "akashic_gemini_model") || "gemini-3.8-flash";
-                if (savedModel.includes('1.5') || savedModel.includes('2.5') || savedModel.includes('2.0')) {
-                    savedModel = "gemini-3.8-flash";
-                    safeSetStorage('localStorage', "akashic_gemini_model", savedModel);
-                }
-                const apiKeyInput = document.getElementById("gemini-api-key-input");
-                const modelSelect = document.getElementById("gemini-model-select");
-                if (apiKeyInput) apiKeyInput.value = savedApiKey;
-                if (modelSelect) modelSelect.value = savedModel;
-
-                const statusEl = document.getElementById("gemini-test-status");
-                if (statusEl) statusEl.textContent = "";
-
-                modal.classList.add('active');
-                modal.style.display = 'flex';
-                document.body.style.overflow = 'hidden';
-            }
-        }
-
-        function closeSettingsModal() {
-            const modal = document.getElementById('settings-modal');
-            if (modal) {
-                modal.classList.remove('active');
-                modal.style.display = 'none';
-            }
-            document.body.style.overflow = '';
-        }
-
-        function formatMarkdownToHTML(md) {
-            if (!md) return "";
-            let html = md
-                .replace(/&/g, "&amp;")
-                .replace(/</g, "&lt;")
-                .replace(/>/g, "&gt;");
-            
-            // 見出し
-            html = html.replace(/^### (.*$)/gim, '<h4>$1</h4>');
-            html = html.replace(/^## (.*$)/gim, '<h4>$1</h4>');
-            html = html.replace(/^# (.*$)/gim, '<h4>$1</h4>');
-            
-            // 強調
-            html = html.replace(/\*\*(.*?)\*\*/gim, '<strong>$1</strong>');
-            html = html.replace(/\*(.*?)\*/gim, '<em>$1</em>');
-            
-            // 引用
-            html = html.replace(/^\> (.*$)/gim, '<blockquote>$1</blockquote>');
-            
-            // 箇条書き
-            html = html.replace(/^\s*-\s+(.*$)/gim, '<li>$1</li>');
-            html = html.replace(/^\s*\d+\.\s+(.*$)/gim, '<li>$1</li>');
-            html = html.replace(/(<li>.*<\/li>(\r?\n)?)+/gim, match => `<ul>${match}</ul>`);
-            
-            // 改行
-            html = html.replace(/\n\n+/g, '<br><br>');
-            html = html.replace(/\n/g, '<br>');
-            return html;
-        }
-
-        async function requestAIMentorComment() {
-            const apiKey = (safeGetStorage('localStorage', 'akashic_gemini_api_key') || '').trim();
-            let model = safeGetStorage('localStorage', 'akashic_gemini_model') || 'gemini-3.8-flash';
-            if (model.includes('1.5') || model.includes('2.5') || model.includes('2.0')) {
-                model = 'gemini-3.8-flash';
-                safeSetStorage('localStorage', 'akashic_gemini_model', model);
-            }
-
-            if (!apiKey) {
-                if (confirm("Gemini API Key is not configured.\nWould you like to open Settings to input your free API key?\n(Press [Cancel] to copy the AI prompt for ChatGPT/Claude)")) {
-                    openSettingsModal();
-                } else {
-                    ReadingRecordIO.copyPrompt();
-                }
-                return;
-            }
-
-            // カードがめくられているか確認
-            const spreadCards = sessionState.cardsInPlay.filter(c => c.role !== 'self');
-            const unrevealed = spreadCards.filter(c => !sessionState.revealedSlots[c.role]);
-            if (unrevealed.length > 0) {
-                if (confirm(`There are still ${unrevealed.length} unrevealed card(s).\nWould you like to reveal all cards now to receive AI oracle guidance?`)) {
-                    revealAllCards();
-                }
-            }
-
-            const placeholder = document.getElementById('ai-mentor-status-placeholder');
-            const loading = document.getElementById('ai-mentor-loading');
-            const responseEl = document.getElementById('ai-mentor-response');
-            const contentEl = document.getElementById('ai-mentor-content');
-            const btn = document.getElementById('btn-fetch-ai-comment');
-
-            if (placeholder) placeholder.style.display = 'none';
-            if (responseEl) responseEl.style.display = 'none';
-            if (loading) loading.style.display = 'block';
-            if (btn) btn.disabled = true;
-
-            const sessionData = ReadingRecordIO.createSessionData();
-            const userPromptText = ReadingRecordIO.formatAsAIPrompt(sessionData);
-
-            const systemInstruction = "You are an enlightened mentor and multidimensional consciousness guide steeped in Gary Bonnell's Akashic Records system. Based on the cards the seeker has drawn through synchronicity, articulate their soul's highest intent beyond the ego's expectations, reveal unconscious blocks and the path of transmutation, and offer actionable prescriptions for daily life with warmth, reverence, and profound clarity. Format your response in clean Markdown with three distinct sections: 1. Soul Intent & Synchronicity Decoded, 2. Subconscious Blocks & Pathway to Liberation, 3. Practical Prescriptions & Daily Integration Exercises.";
-
-            try {
-                const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`;
-                
-                const payload = {
-                    system_instruction: {
-                        parts: [{ text: systemInstruction }]
-                    },
-                    contents: [
-                        {
-                            role: "user",
-                            parts: [{ text: userPromptText }]
-                        }
-                    ],
-                    generationConfig: {
-                        temperature: 0.7,
-                        maxOutputTokens: 2048
-                    }
-                };
-
-                const res = await fetch(endpoint, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(payload)
-                });
-
-                if (!res.ok) {
-                    const errJson = await res.json().catch(() => ({}));
-                    throw new Error(errJson.error?.message || `HTTP error ${res.status}`);
-                }
-
-                const data = await res.json();
-                const aiText = data.candidates?.[0]?.content?.parts?.[0]?.text;
-
-                if (!aiText) {
-                    throw new Error("Failed to receive response text from AI.");
-                }
-
-                sessionState.aiComment = aiText;
-                sessionState.aiChatHistory = [
-                    { role: 'user', text: userPromptText },
-                    { role: 'model', text: aiText }
-                ];
-
-                if (contentEl) {
-                    contentEl.innerHTML = formatMarkdownToHTML(aiText);
-                }
-                if (loading) loading.style.display = 'none';
-                if (responseEl) {
-                    responseEl.style.display = 'block';
-                    slowScrollTo(responseEl, 400);
-                }
-                showToast("✨ Received deep oracle guidance from AI Mentor!");
-            } catch (err) {
-                console.error("Gemini API Error:", err);
-                if (loading) loading.style.display = 'none';
-                if (placeholder) {
-                    placeholder.style.display = 'block';
-                    placeholder.innerHTML = `
-                        <div style="color: #f87171; margin-bottom: 6px;">⚠️ AIコメントの取得に失敗しました</div>
-                        <div style="font-size: 0.75rem; color: var(--text-muted);">${err.message}</div>
-                        <div style="margin-top: 8px;">
-                            <span style="color: var(--gold); cursor: pointer; text-decoration: underline;" onclick="openSettingsModal()">[⚙️ API設定を確認する]</span>
-                            <span style="color: var(--text-muted); margin: 0 6px;">|</span>
-                            <span style="color: #00d2ff; cursor: pointer; text-decoration: underline;" onclick="ReadingRecordIO.copyPrompt()">[📋 プロンプトをコピーして外部で使う]</span>
-                        </div>
-                    `;
-                }
-                alert("Error retrieving AI oracle comment:\n" + err.message);
-            } finally {
-                if (btn) btn.disabled = false;
-            }
-        }
-
-        async function sendAIFollowup() {
-            const input = document.getElementById('ai-followup-input');
-            const btn = document.getElementById('btn-send-followup');
-            if (!input || !input.value.trim()) return;
-
-            const question = input.value.trim();
-            input.value = "";
-
-            const apiKey = (safeGetStorage('localStorage', 'akashic_gemini_api_key') || '').trim();
-            let model = safeGetStorage('localStorage', 'akashic_gemini_model') || 'gemini-3.8-flash';
-            if (model.includes('1.5') || model.includes('2.5') || model.includes('2.0')) {
-                model = 'gemini-3.8-flash';
-                safeSetStorage('localStorage', 'akashic_gemini_model', model);
-            }
-            if (!apiKey) {
-                openSettingsModal();
-                return;
-            }
-
-            const contentEl = document.getElementById('ai-mentor-content');
-            if (!contentEl) return;
-
-            // ユーザーの質問をUIに追記
-            const qDiv = document.createElement('div');
-            qDiv.style.cssText = "margin-top: 14px; padding: 8px 12px; background: rgba(138,43,226,0.15); border-left: 3px solid #a855f7; border-radius: 4px; font-weight: bold; color: #f3e8ff;";
-            qDiv.innerHTML = `💬 Inquiry: ${question}`;
-            contentEl.appendChild(qDiv);
-
-            // 回答枠（ローディング）
-            const aDiv = document.createElement('div');
-            aDiv.style.cssText = "margin-top: 8px; color: var(--text-muted); font-style: italic;";
-            aDiv.textContent = "AI Mentor is contemplating...";
-            contentEl.appendChild(aDiv);
-
-            if (btn) btn.disabled = true;
-
-            try {
-                // 会話履歴をGemini contentsフォーマットに変換
-                const contents = (sessionState.aiChatHistory || []).map(item => ({
-                    role: item.role,
-                    parts: [{ text: item.text }]
-                }));
-                contents.push({ role: 'user', parts: [{ text: question }] });
-
-                const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`;
-                const payload = {
-                    contents: contents,
-                    generationConfig: {
-                        temperature: 0.7,
-                        maxOutputTokens: 1500
-                    }
-                };
-
-                const res = await fetch(endpoint, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(payload)
-                });
-
-                if (!res.ok) {
-                    const errJson = await res.json().catch(() => ({}));
-                    throw new Error(errJson.error?.message || `HTTP error ${res.status}`);
-                }
-
-                const data = await res.json();
-                const replyText = data.candidates?.[0]?.content?.parts?.[0]?.text || "No response was received.";
-
-                sessionState.aiChatHistory.push({ role: 'user', text: question });
-                sessionState.aiChatHistory.push({ role: 'model', text: replyText });
-                sessionState.aiComment += `\n\n---\n**Question:** ${question}\n\n${replyText}`;
-
-                aDiv.style.cssText = "margin-top: 8px;";
-                aDiv.innerHTML = formatMarkdownToHTML(replyText);
-            } catch (err) {
-                console.error("Followup error:", err);
-                aDiv.style.color = "#f87171";
-                aDiv.textContent = "Error: " + err.message;
-            } finally {
-                if (btn) btn.disabled = false;
-            }
+            renderSelfPicker();
         }
 
         // ==========================================
@@ -4265,7 +2604,7 @@
                 let optionsHtml = "";
                 const selectableCards = CARDS_DATA.filter(c => c.no !== 0);
                 selectableCards.forEach(card => {
-                    optionsHtml += `<option value="${card.no}">${card.no}. ${card.theme_ja}</option>`;
+                    optionsHtml += `<option value="${card.no}">${card.no}. ${card.theme_en}</option>`;
                 });
 
                 group.innerHTML = `
@@ -4281,12 +2620,12 @@
                         ${slot.id !== 'self' ? `
                         <div class="form-group">
                             <div class="switch-container" style="margin-top: 5px;">
-                                <span class="switch-label">逆位置</span>
+                                <span class="switch-label">Reversed</span>
                                 <label class="switch">
                                     <input type="checkbox" class="manual-pos-chk" data-slot="${slot.id}" checked>
                                     <span class="slider"></span>
                                 </label>
-                                <span class="switch-label">正位置</span>
+                                <span class="switch-label">Positive</span>
                             </div>
                         </div>
                         ` : ''}
@@ -4316,7 +2655,7 @@
                 const cardNo = parseInt(sel.value);
                 const roleDef = SLOT_ROLES[spread].find(s => s.id === slotId);
 
-                // 正位置チェック (セルフは正位置固定)
+                // Positiveチェック (セルフはPositive固定)
                 let isPositive = true;
                 if (slotId !== 'self') {
                     const chk = container.querySelector(`.manual-pos-chk[data-slot="${slotId}"]`);
@@ -4353,9 +2692,9 @@
 
             // ボード描画 ＆ 初期スロット選択
             const titleEl = document.getElementById('board-title-display');
-            if (spread === 'one') titleEl.textContent = "Manual Entry: 1-Card Insight";
-            else if (spread === 'four') titleEl.textContent = "Manual Entry: 4-Card Spread";
-            else if (spread === 'nine') titleEl.textContent = "Manual Entry: 9-Card Spread";
+            if (spread === 'one') titleEl.textContent = "Manual Spread: 1-Card Draw (Theme)";
+            else if (spread === 'four') titleEl.textContent = "Manual Spread: 4-Card Spread";
+            else if (spread === 'nine') titleEl.textContent = "Manual Spread: 9-Card Spread";
 
             renderReadingBoard();
             selectSlotForReading('self', false);
@@ -4373,7 +2712,7 @@
             }
 
             if (filteredData.length === 0) {
-                container.innerHTML = `<div style="grid-column: 1/-1; text-align: center; color: var(--text-muted); padding: 40px 0;">No card found</div>`;
+                container.innerHTML = `<div style="grid-column: 1/-1; text-align: center; color: var(--text-muted); padding: 40px 0;">No cards found</div>`;
                 return;
             }
 
@@ -4386,10 +2725,10 @@
 
                 cardEl.innerHTML = `
                     <div class="grid-card-img">
-                        <img src="${imgUrl}" alt="${card.theme_ja}" loading="lazy">
+                        <img src="${imgUrl}" alt="${card.theme_en}" loading="lazy">
                     </div>
                     <div class="grid-card-no">No. ${card.no}</div>
-                    <div class="grid-card-title">${card.theme_ja}</div>
+                    <div class="grid-card-title">${card.theme_en}</div>
                 `;
                 container.appendChild(cardEl);
             });
@@ -4405,7 +2744,7 @@
 
             const filtered = selectableCards.filter(card => {
                 return card.no.toString() === query || 
-                       card.theme_ja.toLowerCase().includes(query) || 
+                       card.theme_en.toLowerCase().includes(query) || 
                        card.theme_en.toLowerCase().includes(query) ||
                        (card.spiritual_meaning && card.spiritual_meaning.toLowerCase().includes(query));
             });
@@ -4417,13 +2756,13 @@
             if (!card) return;
 
             document.getElementById('modal-no').textContent = `No. ${card.no}`;
-            document.getElementById('modal-title-ja').textContent = card.theme_ja;
+            document.getElementById('modal-title-ja').textContent = card.theme_en;
             document.getElementById('modal-title-en').textContent = card.theme_en;
             document.getElementById('modal-img').src = getDirectImageUrl(card.url_positive);
             document.getElementById('modal-spiritual-meaning').textContent = card.spiritual_meaning || "None";
             document.getElementById('modal-meaning-pos').textContent = card.positive || "None";
             document.getElementById('modal-meaning-rev').textContent = card.reverse || "None";
-            document.getElementById('modal-description').innerHTML = formatDescription(card.description) || "No interpretation text available.";
+            document.getElementById('modal-description').innerHTML = formatDescription(card.description) || "No description text.";
 
             const lvContainer = document.getElementById('modal-levels-container');
             lvContainer.innerHTML = "";
@@ -4473,8 +2812,6 @@
                 renderSelfPicker();
             } else if (viewId === 'entry') {
                 adjustManualFormFields();
-            } else if (viewId === 'history') {
-                renderHistoryList();
             }
 
             window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -4496,11 +2833,11 @@
             return urlOrId;
         }
 
-        // スプレッドシートからデータをフェッチする関数
+        // From spreadsheet データをフェッチする関数
         async function loadSpreadsheetData(targetId = null) {
             const id = targetId || SPREADSHEET_ID;
             if (!id) {
-                updateSyncUI("offline", "Local Mode", "Operating with built-in card data (latest build snapshot).");
+                updateSyncUI("offline", "Local Mode", "Running with built-in card data (as of the final build).");
                 return false;
             }
 
@@ -4537,17 +2874,17 @@
                 const idxNo = getColIdx(["no", "番号", "カード番号"]);
                 const idxThemeEn = getColIdx(["theme_en", "theme(en)", "英語", "テーマ英語", "theme en"]);
                 const idxThemeJa = getColIdx(["theme_ja", "theme(ja)", "日本語", "テーマ日本語", "theme ja"]);
-                const idxSpiritualMeaning = getColIdx(["spiritual_meaning", "霊的意義", "意味", "spiritual meaning"]);
-                const idxPositive = getColIdx(["positive", "正位置", "positive"]);
-                const idxReverse = getColIdx(["reverse", "逆位置", "reverse"]);
+                const idxSpiritualMeaning = getColIdx(["spiritual_meaning", "Spiritual Meaning", "Meaning", "spiritual meaning"]);
+                const idxPositive = getColIdx(["positive", "Positive", "positive"]);
+                const idxReverse = getColIdx(["reverse", "Reversed", "reverse"]);
                 const idxDescription = getColIdx(["description", "解説", "説明", "description"]);
-                const idxUrlPositive = getColIdx(["url_positive", "url positive", "正位置画像", "正位置url"]);
-                const idxUrlReverse = getColIdx(["url_reverse", "url reverse", "逆位置画像", "逆位置url"]);
+                const idxUrlPositive = getColIdx(["url_positive", "url positive", "Positive画像", "Positiveurl"]);
+                const idxUrlReverse = getColIdx(["url_reverse", "url reverse", "Reversed画像", "Reversedurl"]);
                 const idxSpiritualLevel = getColIdx(["spiritual_level", "spiritual level", "霊的レベル"]);
                 const idxDailyLevel = getColIdx(["daily_level", "daily level", "日常レベル", "日常のレベル"]);
 
                 if (idxNo === -1) {
-                    throw new Error("スプレッドシートに 'No' または '番号' 列が見つかりません。");
+                    throw new Error("Spreadsheet is missing 'No' column.");
                 }
 
                 const parsedCards = [];
@@ -4580,7 +2917,7 @@
                 });
 
                 if (parsedCards.length === 0) {
-                    throw new Error("No valid card records retrieved.");
+                    throw new Error("No valid card data retrieved.");
                 }
 
                 parsedCards.sort((a, b) => a.no - b.no);
@@ -4593,11 +2930,11 @@
                 updateCardBackImageUrl();
 
                 // UIの更新
-                updateSyncUI("online", "Synced (Online)", `Synced ${parsedCards.length} cards from Google Spreadsheet.`);
+                updateSyncUI("online", "Syncing (Online)", `From spreadsheet  ${parsedCards.length}  cards synced.`);
                 return true;
             } catch (err) {
-                console.error("Spreadsheet sync error:", err);
-                updateSyncUI("error", "Sync Error", `Sync failed: ${err.message} (Running on built-in data)`);
+                console.error("Spreadsheet Sync Error:", err);
+                updateSyncUI("error", "Sync Error", `Failed to load: ${err.message} (Running with built-in data)`);
                 return false;
             }
         }
@@ -4625,8 +2962,8 @@
 
         // 設定の初期化
         function initSettings() {
-            const syncEnabled = safeGetStorage('localStorage', "akashic_sync_enabled") === "true";
-            const savedUrl = safeGetStorage('localStorage', "akashic_sync_url") || "";
+            const syncEnabled = safeGetStorage('localStorage', "akashic_en_sync_enabled") === "true";
+            const savedUrl = safeGetStorage('localStorage', "akashic_en_sync_url") || "";
             
             document.getElementById("sync-enable-toggle").checked = syncEnabled;
             document.getElementById("sync-spreadsheet-url").value = savedUrl;
@@ -4634,186 +2971,85 @@
             const urlGroup = document.getElementById("sync-url-group");
             if (syncEnabled) {
                 urlGroup.style.display = "block";
-                document.getElementById("sync-toggle-label").textContent = "Synced with Google Sheet";
+                document.getElementById("sync-toggle-label").textContent = "Syncing from Spreadsheet";
                 SPREADSHEET_ID = extractSpreadsheetId(savedUrl);
             } else {
                 urlGroup.style.display = "none";
-                document.getElementById("sync-toggle-label").textContent = "Using local built-in data";
+                document.getElementById("sync-toggle-label").textContent = "Using local data (built-in)";
                 SPREADSHEET_ID = "";
             }
-
-            // Gemini API 設定の読み込み
-            const savedApiKey = safeGetStorage('localStorage', "akashic_gemini_api_key") || "";
-            let savedModel = safeGetStorage('localStorage', "akashic_gemini_model") || "gemini-3.8-flash";
-            if (savedModel.includes('1.5') || savedModel.includes('2.5') || savedModel.includes('2.0')) {
-                savedModel = "gemini-3.8-flash";
-                safeSetStorage('localStorage', "akashic_gemini_model", savedModel);
-            }
-            const apiKeyInput = document.getElementById("gemini-api-key-input");
-            const modelSelect = document.getElementById("gemini-model-select");
-            if (apiKeyInput) apiKeyInput.value = savedApiKey;
-            if (modelSelect) modelSelect.value = savedModel;
 
             // トグル切り替えイベント
             document.getElementById("sync-enable-toggle").addEventListener("change", function(e) {
                 if (e.target.checked) {
                     urlGroup.style.display = "block";
-                    document.getElementById("sync-toggle-label").textContent = "Synced with Google Sheet";
+                    document.getElementById("sync-toggle-label").textContent = "Syncing from Spreadsheet";
                 } else {
                     urlGroup.style.display = "none";
-                    document.getElementById("sync-toggle-label").textContent = "Using local built-in data";
+                    document.getElementById("sync-toggle-label").textContent = "Using local data (built-in)";
                 }
             });
 
             // 設定ボタンクリックイベント（ヘッダー内およびフローティング）
             document.querySelectorAll(".settings-btn").forEach(btn => {
                 btn.addEventListener("click", () => {
-                    openSettingsModal();
+                    document.getElementById("settings-modal").classList.add("active");
+                    document.body.style.overflow = "hidden";
                 });
             });
 
-            // 閉じるボタン＆キャンセル
-            const closeBtn = document.getElementById("settings-close-btn");
-            if (closeBtn) closeBtn.addEventListener("click", closeSettingsModal);
-            
-            const modalOverlay = document.getElementById("settings-modal");
-            if (modalOverlay) {
-                modalOverlay.addEventListener("click", (e) => {
-                    if (e.target === modalOverlay) {
-                        closeSettingsModal();
-                    }
-                });
-            }
+            // 閉じるボタン＆Cancel
+            const closeSettings = () => {
+                document.getElementById("settings-modal").classList.remove("active");
+                document.body.style.overflow = "";
+            };
+            document.getElementById("settings-close-btn").addEventListener("click", closeSettings);
+            document.getElementById("settings-modal").addEventListener("click", (e) => {
+                if (e.target === document.getElementById("settings-modal")) {
+                    closeSettings();
+                }
+            });
             
             // 保存
-            const saveBtn = document.getElementById("settings-save-btn");
-            if (saveBtn) {
-                saveBtn.addEventListener("click", async () => {
-                    const isEnabled = document.getElementById("sync-enable-toggle").checked;
-                    const url = document.getElementById("sync-spreadsheet-url").value;
-                    
-                    safeSetStorage('localStorage', "akashic_sync_enabled", isEnabled ? "true" : "false");
-                    safeSetStorage('localStorage', "akashic_sync_url", url);
-
-                    // Gemini 設定の保存
-                    const geminiKey = (document.getElementById("gemini-api-key-input")?.value || "").trim();
-                    const geminiModel = document.getElementById("gemini-model-select")?.value || "gemini-3.8-flash";
-                    safeSetStorage('localStorage', "akashic_gemini_api_key", geminiKey);
-                    safeSetStorage('localStorage', "akashic_gemini_model", geminiModel);
-                    
-                    if (isEnabled && url.trim()) {
-                        SPREADSHEET_ID = extractSpreadsheetId(url);
-                        const success = await loadSpreadsheetData();
-                        if (success) {
-                            renderCardsGrid();
-                            renderSelfPicker();
-                        }
-                    } else {
-                        SPREADSHEET_ID = "";
+            document.getElementById("settings-save-btn").addEventListener("click", async () => {
+                const isEnabled = document.getElementById("sync-enable-toggle").checked;
+                const url = document.getElementById("sync-spreadsheet-url").value;
+                
+                safeSetStorage('localStorage', "akashic_en_sync_enabled", isEnabled ? "true" : "false");
+                safeSetStorage('localStorage', "akashic_en_sync_url", url);
+                
+                if (isEnabled && url.trim()) {
+                    SPREADSHEET_ID = extractSpreadsheetId(url);
+                    const success = await loadSpreadsheetData();
+                    if (success) {
+                        // データ再描画
+                        renderCardsGrid();
+                        renderSelfPicker();
                     }
-                    updateAIMentorStatusUI();
-                    showToast("Settings saved successfully");
-                    closeSettingsModal();
-                });
-            }
+                } else {
+                    SPREADSHEET_ID = "";
+                    location.reload();
+                }
+                closeSettings();
+            });
 
-            // Gemini 接続テスト & 利用可能モデル自動取得
-            const geminiTestBtn = document.getElementById("gemini-test-btn");
-            if (geminiTestBtn) {
-                geminiTestBtn.addEventListener("click", async () => {
-                    const apiKey = (document.getElementById("gemini-api-key-input")?.value || "").trim();
-                    let model = document.getElementById("gemini-model-select")?.value || "gemini-3.8-flash";
-                    if (model.includes('1.5') || model.includes('2.5') || model.includes('2.0')) {
-                        model = "gemini-3.8-flash";
-                    }
-                    const statusEl = document.getElementById("gemini-test-status");
-                    if (!apiKey) {
-                        alert("Please enter your Gemini API key.\nYou can obtain it free and instantly at Google AI Studio ( https://aistudio.google.com/app/apikey ).");
-                        return;
-                    }
-                    if (statusEl) {
-                        statusEl.textContent = "Verifying API key & model list...";
-                        statusEl.style.color = "#d8b4fe";
-                    }
-                    try {
-                        // 1. Google APIから実際に利用可能なモデル一覧を取得してセレクトボックスを最新化
-                        try {
-                            const listRes = await fetch(`https://generativelanguage.googleapis.com/v1beta/models?key=${apiKey}`);
-                            if (listRes.ok) {
-                                const listData = await listRes.json();
-                                const available = (listData.models || [])
-                                    .filter(m => m.supportedGenerationMethods && m.supportedGenerationMethods.includes('generateContent'))
-                                    .map(m => m.name.replace(/^models\//, ''))
-                                    .filter(id => !id.includes('embedding') && !id.includes('aqa') && !id.includes('imagen') && !id.includes('tts'));
-
-                                if (available.length > 0) {
-                                    const selectEl = document.getElementById("gemini-model-select");
-                                    if (selectEl) {
-                                        selectEl.innerHTML = "";
-                                        available.forEach(mId => {
-                                            const opt = document.createElement("option");
-                                            opt.value = mId;
-                                            opt.textContent = mId + (mId.includes('3.8-flash') ? ' (Recommended)' : '');
-                                            selectEl.appendChild(opt);
-                                        });
-                                        if (available.includes('gemini-3.8-flash')) {
-                                            model = 'gemini-3.8-flash';
-                                            selectEl.value = model;
-                                        } else if (available.includes(model) && !model.includes('1.5') && !model.includes('2.5')) {
-                                            selectEl.value = model;
-                                        } else {
-                                            model = available[0];
-                                            selectEl.value = model;
-                                        }
-                                    }
-                                }
-                            }
-                        } catch (listErr) {
-                            console.warn("Skipped model list fetch:", listErr);
-                        }
-
-                        // 2. 決定した有効モデルで接続テスト（generateContent）
-                        const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`, {
-                            method: 'POST',
-                            headers: { 'Content-Type': 'application/json' },
-                            body: JSON.stringify({ contents: [{ role: 'user', parts: [{ text: 'Hello, reply with OK.' }] }] })
-                        });
-                        if (!res.ok) {
-                            const err = await res.json().catch(() => ({}));
-                            throw new Error(err.error?.message || `HTTP ${res.status}`);
-                        }
-                        if (statusEl) {
-                            statusEl.textContent = "✅ Connection Successful!";
-                            statusEl.style.color = "#4ade80";
-                        }
-                        alert(`Successfully connected to Gemini API (${model})!\nAvailable models have been updated.\nClick "Save & Close" to begin your reading.`);
-                    } catch (e) {
-                        if (statusEl) {
-                            statusEl.textContent = "❌ Connection Failed";
-                            statusEl.style.color = "#f87171";
-                        }
-                        alert(`Connection failed:\n${e.message}\n\nPlease verify your API key.`);
-                    }
-                });
-            }
-
-            // スプレッドシート接続テスト
+            // Connection Test
             document.getElementById("settings-test-btn").addEventListener("click", async () => {
                 const url = document.getElementById("sync-spreadsheet-url").value;
                 const testId = extractSpreadsheetId(url);
                 if (!testId) {
-                    alert("Please enter the Google Sheet share URL or ID.");
+                    alert("Please enter the spreadsheet share URL or ID.");
                     return;
                 }
                 
-                document.getElementById("settings-sync-status-text").textContent = "Testing connection...";
+                document.getElementById("settings-sync-status-text").textContent = "Connection Testing...";
                 document.getElementById("settings-sync-status-text").style.color = "var(--gold)";
                 
                 const success = await loadSpreadsheetData(testId);
                 if (success) {
-                    alert("スプレッドシートへの接続とデータ同期に成功しました！");
+                    alert("Successfully connected and synced data from spreadsheet!");
                 } else {
-                    alert("接続に失敗しました。URLまたは共有設定を確認してください。");
+                    alert("Connection failed. Please check the URL or share settings.");
                 }
             });
         }
@@ -4828,10 +3064,9 @@
                 
                 // 設定の初期化
                 initSettings();
-                updateAIMentorStatusUI();
                 
                 // スプレッドシート連携が有効な場合はフェッチを実行
-                if (safeGetStorage('localStorage', "akashic_sync_enabled") === "true") {
+                if (safeGetStorage('localStorage', "akashic_en_sync_enabled") === "true") {
                     await loadSpreadsheetData();
                 }
 
@@ -4839,8 +3074,6 @@
                 renderCardsGrid();
                 // セルフカード選択の初期化
                 renderSelfPicker();
-                // 問い・テーマ設定の初期化
-                initIntentStep();
                 console.log("Akashic Records App Initialized successfully.");
             } catch (e) {
                 console.error("Initialization error:", e);
@@ -4855,90 +3088,47 @@
         }
     </script>
 
-    <!-- 設定モーダル（同期・AI連携） -->
-    <div id="settings-modal" class="modal-overlay" onclick="if(event.target===this) closeSettingsModal()">
-        <div class="modal-content" style="max-width: 520px; border: 1.5px solid var(--gold); box-shadow: 0 0 25px rgba(212,175,55,0.25); max-height: 85vh; overflow-y: auto;">
-            <button class="close-btn" onclick="closeSettingsModal()" style="top: 15px; right: 15px;">&times;</button>
-            <h2 class="section-title">Application Settings (AI & Sync)</h2>
+    <!-- 同期設定モーダル -->
+    <div id="settings-modal" class="modal-overlay" onclick="if(event.target===this) { this.classList.remove('active'); document.body.style.overflow=''; }">
+        <div class="modal-content" style="max-width: 480px; border: 1.5px solid var(--gold); box-shadow: 0 0 25px rgba(212,175,55,0.25);">
+            <button class="close-btn" onclick="document.getElementById('settings-modal').classList.remove('active'); document.body.style.overflow='';" style="top: 15px; right: 15px;">&times;</button>
+            <h2 class="section-title">Database Sync Settings</h2>
             
-            <div style="display: flex; flex-direction: column; gap: 20px; margin-bottom: 20px;">
-                <!-- セクション1: アカシックAIメンター設定 -->
-                <div style="background: rgba(138, 43, 226, 0.08); border: 1px solid rgba(138, 43, 226, 0.35); border-radius: 10px; padding: 16px;">
-                    <div style="font-weight: bold; color: #d8b4fe; font-size: 0.95rem; margin-bottom: 10px; display: flex; align-items: center; gap: 6px;">
-                        <span>🔮</span> Akashic AI Mentor Settings (Google Gemini)
-                    </div>
-                    
-                    <div class="form-group" style="margin-bottom: 12px;">
-                        <label for="gemini-api-key-input">Gemini API Key</label>
-                        <div style="display: flex; gap: 8px;">
-                            <input type="password" id="gemini-api-key-input" placeholder="AIzaSy..." style="flex: 1; font-family: monospace;">
-                            <button type="button" class="breath-control-btn" id="btn-toggle-key-visibility" style="padding: 6px 12px; font-size: 0.75rem; background: rgba(255,255,255,0.06); border: 1px solid var(--border-color); color: #fff;" onclick="toggleApiKeyVisibility()">Show</button>
-                        </div>
-                        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 6px;">
-                            <a href="https://aistudio.google.com/app/apikey" target="_blank" rel="noopener noreferrer" style="color: var(--gold); font-size: 0.72rem; text-decoration: underline;">
-                                🔑 Get free API key from Google AI Studio ➔
-                            </a>
-                            <span style="font-size: 0.68rem; color: var(--text-muted);">※ Stored securely in your local browser only</span>
-                        </div>
-                    </div>
-
-                    <div class="form-group" style="margin-bottom: 12px;">
-                        <label for="gemini-model-select">Active Model</label>
-                        <select id="gemini-model-select">
-                            <option value="gemini-3.8-flash" selected>Gemini 3.8 Flash (Recommended • Latest • Fast)</option>
-                            <option value="gemini-3.5-flash-lite">Gemini 3.5 Flash Lite (Ultra-fast • Low latency)</option>
-                            <option value="gemini-3.1-pro">Gemini 3.1 Pro (Deep reasoning • Long form)</option>
-                        </select>
-                    </div>
-
-                    <div style="display: flex; align-items: center; gap: 10px;">
-                        <button id="gemini-test-btn" class="breath-control-btn" style="background: rgba(138,43,226,0.2); border: 1px solid #a855f7; color: #d8b4fe; font-size: 0.75rem; padding: 6px 14px;">AI Connection Test</button>
-                        <span id="gemini-test-status" style="font-size: 0.75rem;"></span>
+            <div style="display: flex; flex-direction: column; gap: 15px; margin-bottom: 20px;">
+                <div class="form-group">
+                    <label>Enable Online Sync</label>
+                    <div class="switch-container">
+                        <label class="switch">
+                            <input type="checkbox" id="sync-enable-toggle">
+                            <span class="slider"></span>
+                        </label>
+                        <span class="switch-label" id="sync-toggle-label">Using local data (built-in)</span>
                     </div>
                 </div>
+                
+                <div class="form-group" id="sync-url-group" style="display: none;">
+                    <label for="sync-spreadsheet-url">Google Spreadsheet Share URL or ID</label>
+                    <input type="text" id="sync-spreadsheet-url" placeholder="https://docs.google.com/spreadsheets/d/.../edit?usp=sharing" style="width: 100%;">
+                    <p style="font-size: 0.65rem; color: var(--text-muted); line-height: 1.3; margin-top: 4px;">
+                        *Set the spreadsheet sharing setting to 'Anyone with the link can view' and enter the URL.
+                    </p>
+                </div>
 
-                <!-- セクション2: データベース同期設定 -->
-                <div style="background: rgba(0, 0, 0, 0.25); border: 1px solid var(--border-color); border-radius: 10px; padding: 16px;">
-                    <div style="font-weight: bold; color: var(--gold); font-size: 0.95rem; margin-bottom: 10px; display: flex; align-items: center; gap: 6px;">
-                        <span>📊</span> Database Sync Settings (Google Sheets)
+                <div class="sync-status-box" style="background: rgba(0,0,0,0.3); border: 1px solid var(--border-color); border-radius: 8px; padding: 12px; font-size: 0.75rem;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+                        <span style="color: var(--text-muted);">Current Status:</span>
+                        <span id="settings-sync-status-text" style="font-weight: bold; color: var(--gold);">Local Mode</span>
                     </div>
-
-                    <div class="form-group" style="margin-bottom: 12px;">
-                        <label>Enable Online Sync</label>
-                        <div class="switch-container">
-                            <label class="switch">
-                                <input type="checkbox" id="sync-enable-toggle">
-                                <span class="slider"></span>
-                            </label>
-                            <span class="switch-label" id="sync-toggle-label">Using Local Data (Built-in)</span>
-                        </div>
+                    <div id="settings-sync-detail-text" style="color: var(--text-muted); line-height: 1.3;">
+                        Running with built-in card data (as of the final build).
                     </div>
-                    
-                    <div class="form-group" id="sync-url-group" style="display: none; margin-bottom: 12px;">
-                        <label for="sync-spreadsheet-url">Google Spreadsheet Share URL or ID</label>
-                        <input type="text" id="sync-spreadsheet-url" placeholder="https://docs.google.com/spreadsheets/d/.../edit?usp=sharing" style="width: 100%;">
-                        <p style="font-size: 0.65rem; color: var(--text-muted); line-height: 1.3; margin-top: 4px;">
-                            ※ Set spreadsheet sharing permissions to "Anyone with the link can view" and paste the URL here.
-                        </p>
-                    </div>
-
-                    <div class="sync-status-box" style="background: rgba(0,0,0,0.3); border: 1px solid var(--border-color); border-radius: 8px; padding: 10px; font-size: 0.75rem; margin-bottom: 10px;">
-                        <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
-                            <span style="color: var(--text-muted);">Current Status:</span>
-                            <span id="settings-sync-status-text" style="font-weight: bold; color: var(--gold);">Local Mode</span>
-                        </div>
-                        <div id="settings-sync-detail-text" style="color: var(--text-muted); line-height: 1.3; font-size: 0.72rem;">
-                            Operating with built-in card data (latest build snapshot).
-                        </div>
-                    </div>
-
-                    <button id="settings-test-btn" class="breath-control-btn" style="background: transparent; border: 1.5px solid var(--gold); color: var(--gold); box-shadow: none; font-size: 0.75rem; padding: 6px 14px;">Spreadsheet Connection Test</button>
                 </div>
             </div>
             
-            <div style="display: flex; justify-content: flex-end; gap: 12px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 15px;">
-                <button id="settings-save-btn" class="breath-control-btn" style="font-size: 0.8rem; padding: 8px 24px;">Save & Close</button>
-                <button id="settings-close-btn" class="breath-control-btn" onclick="closeSettingsModal()" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.15); color: #fff; box-shadow: none; font-size: 0.8rem; padding: 8px 16px;">Cancel</button>
+            <div style="display: flex; justify-content: flex-end; gap: 12px;">
+                <button id="settings-test-btn" class="breath-control-btn" style="background: transparent; border: 1.5px solid var(--gold); color: var(--gold); box-shadow: none; font-size: 0.8rem; padding: 8px 16px;">Connection Test</button>
+                <button id="settings-save-btn" class="breath-control-btn" style="font-size: 0.8rem; padding: 8px 20px;">Save and Close</button>
+                <button id="settings-close-btn" class="breath-control-btn" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.15); color: #fff; box-shadow: none; font-size: 0.8rem; padding: 8px 16px;">Cancel</button>
             </div>
         </div>
     </div>
