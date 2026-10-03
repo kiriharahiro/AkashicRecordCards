@@ -45,45 +45,18 @@
             background-attachment: fixed;
         }
 
-        /* ヘッダー */
+        /* ヘッダー（固定せずスクロールアップで一緒に流れる） */
         header {
             text-align: center;
             padding: 15px 10px;
             border-bottom: 1px solid var(--border-color);
             background: rgba(5, 6, 11, 0.85);
             backdrop-filter: blur(15px);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
+            position: relative;
+            z-index: 10;
             display: flex;
             flex-direction: column;
             align-items: center;
-            transition: all 0.3s ease;
-        }
-
-        header.header-hidden {
-            display: none !important;
-        }
-
-        /* ヘッダー非表示時のフローティング設定コントロール */
-        .floating-header-controls {
-            display: none;
-            position: fixed;
-            top: 10px;
-            right: 10px;
-            z-index: 1001;
-            background: rgba(8, 9, 18, 0.75);
-            backdrop-filter: blur(12px);
-            border: 1px solid var(--border-color);
-            border-radius: 20px;
-            padding: 4px 10px;
-            align-items: center;
-            gap: 8px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
-        }
-
-        body.header-is-hidden .floating-header-controls {
-            display: flex;
         }
 
         header h1 {
@@ -1040,12 +1013,6 @@
             </div>
         </div>
     </header>
-
-    <!-- ヘッダー非表示用フローティング設定コントロール -->
-    <div id="floating-header-controls" class="floating-header-controls">
-        <span id="sync-status-indicator-float" class="sync-status-dot offline" title="ローカルデータ使用中"></span>
-        <button id="settings-btn-float" class="settings-btn" title="同期設定" style="background: none; border: none; color: var(--gold); font-size: 1.2rem; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: transform 0.3s ease;">⚙️</button>
-    </div>
 
 
     <!-- メインコンテンツ -->
@@ -2768,20 +2735,8 @@
             document.body.style.overflow = '';
         }
 
-        // ヘッダーを非表示にする関数
-        function hideHeader() {
-            const header = document.getElementById('main-header');
-            if (header) {
-                header.classList.add('header-hidden');
-            }
-            document.body.classList.add('header-is-hidden');
-        }
-
         // ナビゲーションビュー切り替えのフック
         function switchView(viewId, element) {
-            // メニューから選択されたらヘッダーを非表示にする
-            hideHeader();
-
             // ナビゲーションアクティブ
             document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
             if (element) {
