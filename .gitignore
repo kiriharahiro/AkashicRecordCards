@@ -7,3 +7,12 @@
 *.pdf
 .DS_Store
 Thumbs.db
+
+# 内部資料・開発用フォルダ・スクリプトの公開除外（Privateリポジトリで管理）
+v.*/
+*.py
+*.csv
+*仕様*.md
+*操作手順*.md
+cards_data*.json
+
