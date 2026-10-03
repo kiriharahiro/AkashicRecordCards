@@ -58,6 +58,32 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        header.header-hidden {
+            display: none !important;
+        }
+
+        /* ヘッダー非表示時のフローティング設定コントロール */
+        .floating-header-controls {
+            display: none;
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            z-index: 1001;
+            background: rgba(8, 9, 18, 0.75);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 4px 10px;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+        }
+
+        body.header-is-hidden .floating-header-controls {
+            display: flex;
         }
 
         header h1 {
@@ -1001,7 +1027,7 @@
     </div>
 
     <!-- ヘッダー -->
-    <header>
+    <header id="main-header">
         <div class="header-container" style="position: relative; width: 100%; display: flex; justify-content: center; align-items: center; min-height: 50px;">
             <div style="flex-grow: 1; text-align: center;">
                 <h1>Akashic Records Reading</h1>
@@ -1014,6 +1040,12 @@
             </div>
         </div>
     </header>
+
+    <!-- ヘッダー非表示用フローティング設定コントロール -->
+    <div id="floating-header-controls" class="floating-header-controls">
+        <span id="sync-status-indicator-float" class="sync-status-dot offline" title="Using Local Data"></span>
+        <button id="settings-btn-float" class="settings-btn" title="Sync Settings" style="background: none; border: none; color: var(--gold); font-size: 1.2rem; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: transform 0.3s ease;">⚙️</button>
+    </div>
 
 
     <!-- メインコンテンツ -->
@@ -2749,15 +2781,30 @@
             document.body.style.overflow = '';
         }
 
+        // Function to hide header
+        function hideHeader() {
+            const header = document.getElementById('main-header');
+            if (header) {
+                header.classList.add('header-hidden');
+            }
+            document.body.classList.add('header-is-hidden');
+        }
+
         // ナビゲーションビュー切り替えのフック
         function switchView(viewId, element) {
+            // Hide header on menu selection
+            hideHeader();
+
             // ナビゲーションアクティブ
             document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
-            element.classList.add('active');
+            if (element) {
+                element.classList.add('active');
+            }
 
             // 画面表示
             document.querySelectorAll('.app-view').forEach(view => view.classList.remove('active'));
-            document.getElementById(`view-${viewId}`).classList.add('active');
+            const targetView = document.getElementById(`view-${viewId}`);
+            if (targetView) targetView.classList.add('active');
 
             // ビュー固有の初期化
             if (viewId === 'reading') {
@@ -2765,6 +2812,8 @@
             } else if (viewId === 'entry') {
                 adjustManualFormFields();
             }
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
         // ==========================================
@@ -2891,11 +2940,10 @@
 
         // UI表示を切り替えるヘルパー
         function updateSyncUI(status, statusText, detailText) {
-            const indicator = document.getElementById("sync-status-indicator");
-            if (indicator) {
+            document.querySelectorAll(".sync-status-dot").forEach(indicator => {
                 indicator.className = `sync-status-dot ${status}`;
                 indicator.title = statusText;
-            }
+            });
 
             const modalStatus = document.getElementById("settings-sync-status-text");
             if (modalStatus) {
@@ -2941,10 +2989,12 @@
                 }
             });
 
-            // 設定ボタンクリックイベント
-            document.getElementById("settings-btn").addEventListener("click", () => {
-                document.getElementById("settings-modal").classList.add("active");
-                document.body.style.overflow = "hidden";
+            // 設定ボタンクリックイベント（ヘッダー内およびフローティング）
+            document.querySelectorAll(".settings-btn").forEach(btn => {
+                btn.addEventListener("click", () => {
+                    document.getElementById("settings-modal").classList.add("active");
+                    document.body.style.overflow = "hidden";
+                });
             });
 
             // 閉じるボタン＆Cancel
