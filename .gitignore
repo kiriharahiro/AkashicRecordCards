@@ -1,18 +1,58 @@
-# 画像やZIP、PDFなどを誤ってGitHubにアップロードしないための除外設定
+# ==========================================
+# AkashicRecordCards .gitignore
+# ==========================================
+
+# 1. 画像・メディア・大容量バイナリファイル
 *.zip
+*.tar.*
+*.gz
+*.pdf
 *.jpg
 *.jpeg
 *.png
 *.gif
-*.pdf
-.DS_Store
-Thumbs.db
+*.webp
+*.ico
+*.mp4
+*.mov
+*.avi
+*.webm
 
-# 内部資料・開発用フォルダ・スクリプトの公開除外（Privateリポジトリで管理）
+# 2. プレゼンテーション・Office・作業用データ
+*.pptx
+*.ppt
+*.xlsx
+*.xls
+*.docx
+*.doc
+*.csv
+
+# 3. 内部資料・開発用フォルダ・スクリプト（Privateリポジトリで管理）
 v.*/
 *.py
-*.csv
 *仕様*.md
 *操作手順*.md
 cards_data*.json
 
+# 4. AI対話ログ・アシスタントメタデータ (重大な漏洩防止)
+conversation_log*
+*.jsonl
+brain/
+.gemini/
+.agents/
+
+# 5. 環境変数・シークレット
+.env
+.env.*
+*.secret
+credentials.json
+token.json
+
+# 6. OS・エディタ・IDE設定
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
+*.log
+*.tmp
